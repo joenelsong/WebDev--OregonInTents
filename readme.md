@@ -16,12 +16,12 @@ Technology Stack:
 # RESTFUL ROUTES
 
 ## Campgrounds
-### name |   url              |  verb  |   description                          |
----------------------------------------------------------------------------------
-* INDEX  |  /campgrounds      |  GET   |   Display a list of all campgrounds
-* NEW    |  /campgrounds/new  |  GET   |   Displays form to make a new campgrounds
-* CREATE |  /campgrounds      |  POST  |   Creates a new campground entry
-* SHOW   |  /campgrounds:id   |  GET   |   Shows info about one campground
+|### name |   url             |  verb  |   description                              |
+|---------------------------------------------------------------------------------- |
+| INDEX  |  /campgrounds      |  GET   |   Display a list of all campgrounds        |
+| NEW    |  /campgrounds/new  |  GET   |   Displays form to make a new campgrounds  |
+| CREATE |  /campgrounds      |  POST  |   Creates a new campground entry						|
+| SHOW   |  /campgrounds:id   |  GET   |   Shows info about one Campgrounds 				|
 
 
 #NESTED ROUTES
