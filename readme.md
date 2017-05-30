@@ -1,6 +1,6 @@
-Version 5: 
-* Added styling, mostly to show page
-* Added new elements to show page for future implementations
+Version 7: 
+* Refactored app.js, added Routes folder
+* using express.Router() to reorganize all routes
 
 
 Technology Stack:

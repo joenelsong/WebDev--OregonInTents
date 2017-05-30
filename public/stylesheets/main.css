@@ -5,3 +5,10 @@
 .thumbnail img {
   width: 100%;
 }
+
+footer {
+  margin-top: 6em;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
