@@ -1,6 +1,8 @@
-Version 7: 
-* Refactored app.js, added Routes folder
-* using express.Router() to reorganize all routes
+Version 9: 
+* Now require authentication to create new campgrounds
+* Updated Campground Schema to contain information about the author who submitted the campground
+* Now showing the campground submission's author's name on the show page ('/campgrounds/:id')
+
 
 
 Technology Stack:
@@ -16,7 +18,7 @@ Technology Stack:
 # RESTFUL ROUTES
 
 ## Campgrounds
-### name |   url             |  verb  |   description                             
+### name |   url              |  verb  |   description                             
 ----------------------------------------------------------------------------------
 * INDEX  |  /campgrounds      |  GET   |   Display a list of all campgrounds
 * NEW    |  /campgrounds/new  |  GET   |   Displays form to make a new campgrounds

@@ -20,6 +20,9 @@
           <h4 class="pull-right">$Price</h4>
           <h4><a><%= campground.name %></a></h4>
           <p><%= campground.description %></p>
+          <p>
+            <em>Submitted By <%= campground.author.username %></em>
+            </p>
         </div>
       </div>
       
@@ -32,7 +35,7 @@
           <% campground.comments.forEach(function(comment){ %>
           <div class="row">
             <div class="col-md-12">
-              <%= comment.author %>
+              <%= comment.author.username %>
               <span class="pull-right"> X days ago</span>
               <p> <strong><%= comment.text %></strong></p>
             </div>

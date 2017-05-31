@@ -14,7 +14,7 @@ router.get("/campgrounds/:id/comments/new",isLoggedIn, function(req, res){
   // find campground by id
   Campground.findById(req.params.id, function(err, campground){
     if(err){
-      console.log(err);
+      console.log("campground.js >> " + err);
     } else {
       res.render("comments/new", {campground: campground});
     }
@@ -26,7 +26,7 @@ router.post("/campgrounds/:id/comments", isLoggedIn, function(req, res){
 //lookup campground using ID
   Campground.findById(req.params.id, function(err, cg){
     if(err){
-      console.log(err);
+      console.log("campground.js >>  " + err);
       res.render("campgrounds/campground404");
     } else {
       
@@ -35,6 +35,12 @@ router.post("/campgrounds/:id/comments", isLoggedIn, function(req, res){
         if(err) { 
           console.log(err) 
         } else {
+          // add username and id to comment
+          comment.author.id = req.user._id;
+          comment.author.username = req.user.username;
+          // save comment
+          comment.save();
+          
            //associate new comment to campground
           cg.comments.push(comment);
           cg.save();

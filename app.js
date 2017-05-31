@@ -28,7 +28,7 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
     
-//seedDB();
+//seedDB(); // seed the database
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/OregonInTents");
 
