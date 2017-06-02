@@ -59,7 +59,7 @@ router.get("/campgrounds/:id", function(req, res) {
   Campground.findById(req.params.id).populate("comments").exec(function(err, foundCampground){
     if(err){
       console.log('campgrounds.js >> ' + err);
-      res.render("campgrounds/campground404");
+      res.render("campgrounds");
     } else {
       //console.log(foundCampground);
       //render show template with that acmpground
@@ -68,12 +68,68 @@ router.get("/campgrounds/:id", function(req, res) {
   });
 });
 
+
+// EDIT Route -
+router.get('/campgrounds/:id/edit', checkCampgroundOwnership, function(req, res) {
+
+  Campground.findById(req.params.id, function(err, foundCampground) { // no need to check for err because we already did in our middleware checkCampgroundOwnership()
+    res.render("campgrounds/edit", {campground: foundCampground});
+  });
+});
+
+// UPDATE Route - 
+router.put('/campgrounds/:id', checkCampgroundOwnership, function(req, res){
+  // find and update the specified campground
+  Campground.findByIdAndUpdate(req.params.id, req.body.campgroundForm, function(err, updatedCampground) {
+    if(err){
+      res.redirect('/campgrounds');
+    } else {
+      //redirect to show page
+      res.redirect('/campgrounds/' + req.params.id);
+    }
+  });
+});
+
+// DESTROY Route -
+router.delete('/campgrounds/:id', checkCampgroundOwnership, function(req, res) {
+  Campground.findByIdAndRemove(req.params.id, function(err) {
+    if(err) {
+      res.redirect("/campgrounds");
+    } else {
+      res.redirect("/campgrounds");
+    }
+  });
+});
+
+
 // middleware
 function isLoggedIn(req, res, next) {
   if(req.isAuthenticated()){
     return next();
   }
   res.redirect('/login');
+}
+
+function checkCampgroundOwnership(req, res, next) {
+  // is a user logged in?
+  if(req.isAuthenticated()) { 
+    Campground.findById(req.params.id, function(err, foundCampground){
+      if(err) {
+        res.redirect('back');
+      } else {
+        // does user own campground?
+        if(foundCampground.author.id.equals(req.user._id)) { // must use .equals() === will not work because they are different objects
+          // authorize the edit
+          next();
+        } else {
+          // Deny access to edit and reload page
+          res.redirect("back");
+        }
+      }
+  });
+  } else {
+    res.redirect('back'); // takes user back to where they came from
+  }
 }
 
 module.exports = router;
