@@ -1,13 +1,3 @@
-Version 10: 
-* Added RESTful EDIT route for campgrounds
-* Added RESTful DESTROY route for campgrounds
-* Added Authorization to EDIT and DESTROY for campgrounds
-* Added RESTful EDIT route for comments
-* Added RESTful DESTROY route for comments
-* Added Authorization to EDIT and DESTROY for comments
-* minor styling changes to campground show page
-
-
 Technology Stack:
 
 * Node.js
@@ -36,3 +26,12 @@ Technology Stack:
 ----------------------------------------------------------------------------------
 * NEW     campgrounds/:id/comments/new    GET
 * CREATE  campgrounds/:id/comments/       POST
+
+Version 10.1: 
+* Added RESTful EDIT route for campgrounds
+* Added RESTful DESTROY route for campgrounds
+* Added Authorization to EDIT and DESTROY for campgrounds
+* Added RESTful EDIT route for comments
+* Added RESTful DESTROY route for comments
+* Added Authorization to EDIT and DESTROY for comments
+* minor styling changes to campground show page

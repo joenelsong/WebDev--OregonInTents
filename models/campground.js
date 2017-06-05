@@ -48,6 +48,20 @@ module.exports = Campground;
   Richardson Park
   http://www.sewthankfulblog.com/wp-content/uploads/2015/08/RichardsonParkCamp.jpg
   Nice park. Camping. Clean campground  Showers. Large lake.
+ 
+  { 
+  name: Cascadia State Park
+  image: https://oregonstateparks.reserveamerica.com/webphotos/OR/pid402240/0/540x360.jpg
+  description: "Cascadia State Park is located on Highway 20, on the western slope of the Cascade Mountains, where
+                Soda Creek flows into the South Santiam River. There are 25 first-come, first-serve primitive campsites, 2 reservable
+                group tent areas, 2 reservable group picnic areas with covered kitchen shelters and electricity and ADA accessible restrooms and showers.
+                The park is remote, quiet and loaded with history. There are trails to crystal clear South Santiam River for swimming and fishing.
+                A short hike from the campground leads through lush forest to a 150 foot ribbon of Soda Creek known as Lower Soda Creek Falls. "
   
+  
+  
+  other:
+  website: https://oregonstateparks.reserveamerica.com/camping/cascadia-state-park/r/campgroundDetails.do?contractCode=OR&parkId=402240#sr_a
+  }
   ]
 */

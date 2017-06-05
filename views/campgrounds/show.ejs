@@ -22,14 +22,16 @@
           <p><%= campground.description %></p>
           <p>
             <em>Submitted By <%= campground.author.username %></em>
-            </p>
-            <!-- Campground Owner Buttons -->
-            <% if(currentUser && campground.author.id.equals(currentUser._id)) { %>
-              <a class = "btn btn-sm btn-warning" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
-              <form class = "delete-form" action = "/campgrounds/<%= campground._id %>?_method=DELETE" method = "POST">
-                <button class = "btn btn-sm btn-danger">Delete</button>
-              </form>
-              <% } %>
+          </p>
+          
+          <!-- Campground Owner Buttons -->
+          <% if(currentUser && campground.author.id.equals(currentUser._id)) { %>
+            <a class = "btn btn-sm btn-warning" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
+            <form class = "delete-form" action = "/campgrounds/<%= campground._id %>?_method=DELETE" method = "POST">
+              <button class = "btn btn-sm btn-danger">Delete</button>
+            </form>
+            <% } %>
+            
         </div>
       </div>
       
@@ -46,13 +48,20 @@
             <div class="col-md-12">
               <%= comment.author.username %>
               <span class="pull-right"> X days ago</span>
-              <p> <strong><%= comment.text %></strong></p>
-              <a class ="btn btn-xs btn-warning" href="/campgrounds/<%=campground._id %>/comments/<%=comment._id%>/edit">
-                Edit
-              </a>
-              <form class="delete-form" action ="/campgrounds/<%=campground._id %>/comments/<%=comment._id%>?_method=DELETE" method="POST">
-                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
-              </form>
+              <p> 
+                <strong><%= comment.text %></strong>
+              </p>
+              
+              <!-- Comment Owner Buttons -->
+              <% if(currentUser && comment.author.id.equals(currentUser._id)) { %>
+                <a class ="btn btn-xs btn-warning" href="/campgrounds/<%=campground._id %>/comments/<%=comment._id%>/edit">
+                  Edit
+                </a>
+                <form class="delete-form" action ="/campgrounds/<%=campground._id %>/comments/<%=comment._id%>?_method=DELETE" method="POST">
+                  <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                </form>
+              <% } %>
+                
             </div>
           </div>
           
