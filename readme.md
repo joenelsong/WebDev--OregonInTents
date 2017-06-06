@@ -27,11 +27,6 @@ Technology Stack:
 * NEW     campgrounds/:id/comments/new    GET
 * CREATE  campgrounds/:id/comments/       POST
 
-Version 10.1: 
-* Added RESTful EDIT route for campgrounds
-* Added RESTful DESTROY route for campgrounds
-* Added Authorization to EDIT and DESTROY for campgrounds
-* Added RESTful EDIT route for comments
-* Added RESTful DESTROY route for comments
-* Added Authorization to EDIT and DESTROY for comments
-* minor styling changes to campground show page
+Version 12: 
+* Stylized Landing page with bootstrap and css animations
+* Installed nodemon (https://github.com/remy/nodemon) on workspace for rapid testing

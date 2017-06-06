@@ -29,6 +29,7 @@ router.post("/campgrounds/:id/comments", myMiddleware.isLoggedIn, function(req, 
   Campground.findById(req.params.id, function(err, cg){
     if(err){
       console.log("campground.js >>  " + err);
+      res.flash('error', 'Campground not found');
       res.render("campgrounds/campground404");
     } else {
       
@@ -46,7 +47,7 @@ router.post("/campgrounds/:id/comments", myMiddleware.isLoggedIn, function(req, 
            //associate new comment to campground
           cg.comments.push(comment);
           cg.save();
-          
+          req.flash('success', 'Successfully added comment')
           res.redirect("/campgrounds/" + cg._id);
         }
       });
@@ -94,6 +95,7 @@ router.delete("/campgrounds/:id/comments/:comment_id", myMiddleware.checkComment
       res.redirect('back');
     } else {
       // 'comment successfully removed'
+      req.flash('success', "Your comment has been successfully deleted.");
       res.redirect('/campgrounds/' + req.params.id);
     }
   });

@@ -9,11 +9,18 @@ var methodOverride    = require('method-override');
 //var Comments          = require('./models/user');
 var User              = require('./models/user');
 var seedDB            = require("./seeds");
+
+var flash = require('connect-flash');
     
 
+app.use(bodyParser.urlencoded({extended: true}));
+app.set("view engine", "ejs");
+app.use(express.static(__dirname + "/public"));
+app.use(methodOverride('_method'));
+app.use(flash());
 
 // PASSPORT CONFIGURATION
-app.use(require('express-session') ({
+app.use(require('express-session') ({ // session tracker
   secret: 'here we are born to be kings we are the princes of the universe',
   resave: false,
   saveUninitialized: false
@@ -24,6 +31,8 @@ app.use(passport.session());
 // Put currentUser Variable in res.locals so we can access it from all of our templates
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user; 
+  res.locals.errorMessage = req.flash('error');
+  res.locals.successMessage = req.flash('success');
   next();
 });
 
@@ -34,12 +43,6 @@ passport.deserializeUser(User.deserializeUser());
 //seedDB(); // seed the database -- broken, just deletes for now
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost/OregonInTents");
-
-
-app.use(bodyParser.urlencoded({extended: true}));
-app.set("view engine", "ejs");
-app.use(express.static(__dirname + "/public"));
-app.use(methodOverride('_method'));
 
 
 // =================

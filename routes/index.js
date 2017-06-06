@@ -25,16 +25,18 @@ router.post('/register', function(req, res) {
     User.register(newUser, req.body.password, function(err, user) {
       if(err){
         console.log(err);
+        req.flash('error', err.message);
         return res.redirect('register');
       }
       passport.authenticate('local')(req, res, function(){
+        req.flash('success', 'Thank you for registering an account: (' +user.username+') with OregonInTents!')
         res.redirect('/campgrounds'); //redirect to campground show page
       });
     });
 });
 
 
-// Login form route
+// Show Login form
 router.get('/login', function(req, res) {
   res.render('login');
 });
@@ -51,14 +53,9 @@ router.post('/login', passport.authenticate('local',
 // Logout Route
 router.get('/logout', function(req, res) {
     req.logout();
+    req.flash('success', "Logged out successfully.");
     res.redirect('/campgrounds');
 });
 
-function isLoggedIn(req, res, next) {
-  if(req.isAuthenticated()){
-    return next();
-  }
-  res.redirect('/login');
-}
 
 module.exports = router;

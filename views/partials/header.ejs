@@ -28,4 +28,15 @@
     </div>
   </nav>
   
+  <!-- User Feedback Flash Messages -->
+  <div class = 'container'>
+    <% if(errorMessage && errorMessage.length > 0) { %>
+      <div class="alert alert-danger"><%= errorMessage %></div>
+    <% } %>
+    
+    <% if(successMessage && successMessage.length > 0) { %>
+      <div class="alert alert-success"><%= successMessage %></div>
+    <% } %>
+  </div>
+
   <body>
