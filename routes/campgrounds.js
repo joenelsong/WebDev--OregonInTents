@@ -4,6 +4,7 @@ var router = express.Router();
 var Campground = require("../models/campground");
 
 var myMiddleware = require('../middleware'); // node will automatically require index.js because it is named index.js
+var geocoder = require('geocoder');
 
 // ===================
 // CAMPGROUNDS ROUTES
@@ -39,13 +40,22 @@ router.post("/campgrounds", myMiddleware.isLoggedIn, function(req, res) {
     id: req.user._id,
     username: req.user.username,
   }
-  var newCampground = {name: name, image: image, description: desc, author: author};
+  var price = req.body.price;
+  geocoder.geocode(req.body.location, function (err, data) {
+  var lat = data.results[0].geometry.location.lat;
+  var lng = data.results[0].geometry.location.lng;
+  var location = data.results[0].formatted_address;
+  })
+  
+  var website = req.body.website;
+  
+  var newCampground = {name: name, price: price, image: image, website: website, description: desc, author: author, location: location, lat: lat, lng: lng};
 
   
   // Create a new campground and save to DB
   Campground.create(newCampground, function(err, newlyCreated){
     if(err) {
-      console.log('campgrounds.js >> ' + err);
+      console.log('routes/campgrounds.js >> ' + err);
     } else {
       //redirect back to campgrounds page
       console.log(newlyCreated);
@@ -64,6 +74,7 @@ router.get("/campgrounds/:id", function(req, res) {
       res.render("campgrounds");
     } else {
       //console.log(foundCampground);
+      console.log(foundCampground['website']);
       //render show template with that acmpground
       res.render("campgrounds/show", {campground: foundCampground});
     }
@@ -81,14 +92,25 @@ router.get('/campgrounds/:id/edit', myMiddleware.checkCampgroundOwnership, funct
 
 // UPDATE Route - 
 router.put('/campgrounds/:id', myMiddleware.checkCampgroundOwnership, function(req, res){
-  // find and update the specified campground
-  Campground.findByIdAndUpdate(req.params.id, req.body.campgroundForm, function(err, updatedCampground) {
-    if(err){
-      res.redirect('/campgrounds');
-    } else {
-      //redirect to show page
-      res.redirect('/campgrounds/' + req.params.id);
-    }
+  geocoder.geocode(req.body.campgroundForm['location'], function (err, data) {
+    var lat = data.results[0].geometry.location.lat;
+    var lng = data.results[0].geometry.location.lng;
+    var location = data.results[0].formatted_address;
+    
+    var newData = Object.assign(req.body.campgroundForm, {lat: lat, lng: lng});
+    console.log(newData);
+      
+    // find and update the specified campground
+    Campground.findByIdAndUpdate(req.params.id, {$set: newData}, function(err, updatedCampground) {
+      if(err){
+        req.flash('error', err.message);
+        res.redirect('/campgrounds');
+      } else {
+        //redirect to show page
+        req.flash('success', 'Successfully Updated Campground!');
+        res.redirect('/campgrounds/' + req.params.id);
+      }
+    });
   });
 });
 

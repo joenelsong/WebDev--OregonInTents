@@ -27,6 +27,7 @@ Technology Stack:
 * NEW     campgrounds/:id/comments/new    GET
 * CREATE  campgrounds/:id/comments/       POST
 
-Version 12: 
-* Stylized Landing page with bootstrap and css animations
-* Installed nodemon (https://github.com/remy/nodemon) on workspace for rapid testing
+Version 13: 
+* Installed Geocoder
+* Configured Google Maps API
+* Added Labels to New and Edit campground forms

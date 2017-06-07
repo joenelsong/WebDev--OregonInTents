@@ -9,12 +9,29 @@
       
       <form action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST">
         <div class="form-group">
+          <label for="location">Name</label>
           <input class="form-control" type="text" name="campgroundForm[name]" value = "<%= campground.name %>">
         </div>
+        
         <div class="form-group">
+          <label for="location">Location</label>
+          <input class="form-control" type="text" name="campgroundForm[location]" id="location" value="<%= campground.location %>">
+        </div>
+        
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input class="form-control" type="number" name="campgroundForm[price]" value = "<%= campground.price %>" min="0.00" step="0.01">
+        </div>
+        <div class="form-group">
+          <label for="image">Image URL</label>
           <input class="form-control" type="text" name="campgroundForm[image]" value = "<%= campground.image %>">
         </div>
         <div class="form-group">
+          <label for="website">Website</label>
+          <input class="form-control" type="url" name="campgroundForm[website]" value = "<%= campground.website %>">
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
           <input class ="form-control" type="text" name="campgroundForm[description]" value = "<%= campground.description %>">
         </div>
         <div class="form-group">

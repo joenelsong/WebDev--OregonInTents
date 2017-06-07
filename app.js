@@ -42,7 +42,7 @@ passport.deserializeUser(User.deserializeUser());
     
 //seedDB(); // seed the database -- broken, just deletes for now
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost/OregonInTents");
+mongoose.connect("mongodb://localhost/OregonInTents13");
 
 
 // =================

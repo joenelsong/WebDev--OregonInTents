@@ -10,6 +10,7 @@
         <li class="list-group-item">Info 2</li>
         <li class="list-group-item">Info 3</li>
       </div>
+      <div id="map"></div>
     </div>
     
     <!-- Main Content -->
@@ -17,8 +18,8 @@
       <div class="thumbnail">
         <img class="img-responsive" src="<%=campground.image%>">
         <div class="caption-full">
-          <h4 class="pull-right">$Price</h4>
-          <h4><a><%= campground.name %></a></h4>
+          <h4 class="pull-right">$<%= campground.price %>/night</h4>
+          <h4><a href="<%= campground.website %>"><%= campground.name %></a></h4>
           <p><%= campground.description %></p>
           <p>
             <em>Submitted By <%= campground.author.username %></em>
@@ -73,17 +74,34 @@
 </div><!-- END container -->
 
 
-  
-
-
-  
-
-  
-
-  
-    
-  
-  
-
+<!-- Google Maps Script -->  
+<script>
+  function initMap() {
+    var lat = <%= campground.lat %>;
+    var lng = <%= campground.lng %>;
+    var center = {lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: center,
+        scrollwheel: false
+    });
+    var contentString = `
+      <strong><%= campground.name %><br />
+      <%= campground.location %></strong>
+      <p><%= campground.description %></p>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMLJFpf_-liA_kmXLuSAnYufeY3xrnVBI&callback=initMap"></script>
 
 <% include ../partials/footer %>
