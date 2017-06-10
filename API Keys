@@ -1,0 +1,23 @@
+[ Google Maps API ]
+Project: OregonInTents
+Key: AIzaSyBMLJFpf_-liA_kmXLuSAnYufeY3xrnVBI
+https://console.developers.google.com/apis/credentials/key/175?authuser=0&project=oregonintents-1496785780055&pli=1
+
+[ Google Captcha ]
+Site Key: 6LeY4CQUAAAAAMSWbEG_zffmN3NQJIvgbR6TLMwP
+Private Key: 6LeY4CQUAAAAAMgXhZJrX3rirT0TPhamsGB
+
+
+
+
+
+Testing tools:
+npm install locus
+npm install nodemon
+
+
+
+
+Make Admin
+
+db.users.update( {username: "joe" }, { $set: {isAdmin: true} } )

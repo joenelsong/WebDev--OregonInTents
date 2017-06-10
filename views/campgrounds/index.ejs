@@ -1,0 +1,68 @@
+<% include ../partials/header %>
+  <header class="jumbotron">
+    <div class="container">
+      <h1><img src="https://lh4.googleusercontent.com/nuGvHcP2Yi7m8cs6sJdzM2hNmzn9hV8jG5wxeR6UJXj8khMjlLC_TUgrL5SiRifF_L5F6ZFR=w1920-h950-rw" style="width: 8vw"> Welcome to Oregon In Tents</h1>
+      <p>Take a look at our public campground listings or check out our members only secret campgrounds.</p>
+      <p> <a class="btn btn-primary btn-lg" href="/campgrounds/new">Add a new campground</a>
+    </div>
+  </header>
+
+<!-------------------------
+    Public Campgrounds 
+-------------------------->
+  <div class ="row">
+    <div class="col-lg-12">
+      <h2>Public Campgrounds </h2>
+      <hr>
+    </div>
+  </div>
+  
+  <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+    <% publicCampgrounds.forEach(function(campground) { %>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="thumbnail">
+          <img src="<%=campground.image%>">
+            <div class="caption">
+              <h4> <%=campground.name %> </h4>
+              <p><%=campground.location%></p>
+              <p>$ <%=campground.price%> / night</p>
+              
+            </div>
+            <p>
+              <a href="/campgrounds/<%= campground._id %>" class="btn btn-info"><i class="fa fa-info-circle" aria-hidden="true"></i><span>    More Info</span></a>
+            </p>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+  
+<!-------------------------
+    Secret Campgrounds 
+-------------------------->
+  <div class ="row">
+    <div class="col-lg-12">
+      <h2>Secret Campgrounds</h2>
+      <hr>
+    </div>
+  </div>
+  
+   <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+    <% secretCampgrounds.forEach(function(campground) { %>
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="thumbnail">
+          <img src="<%=campground.image%>">
+            <div class="caption">
+              <h4> <%=campground.name %> </h4>
+              <p><%=campground.location%></p>
+              <p>$ <%=campground.price%> / night</p>
+              
+            </div>
+            <p>
+              <a href="/campgrounds/<%= campground._id %>" class="btn btn-info"><i class="fa fa-info-circle" aria-hidden="true"></i><span>    More Info</span></a>
+            </p>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+
+<% include ../partials/footer %>

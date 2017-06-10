@@ -1,0 +1,27 @@
+<% include partials/header %>
+<div class="row">
+  <h1 style="text-align: center">Login Page</h1>
+  <div style= "width: 30%; margin: 25px auto;">
+    
+    <form action='/login' method='POST'>
+      <div class = "form-group">
+        <div class= "input-group">
+          <span class="input-group-addon" id="basic-addon-name">Username</span>
+          <input class = "form-control" type='text' name = 'username' placeholder = '' aria-describedby="basic-addon-name" pattern="[a-z]{,24}" title="Lowercase characters only and 24 characters maximum" required>
+        </div>
+      </div>
+      
+      <div class = "form-group">
+        <div class= "input-group">
+          <span class="input-group-addon" id="basic-addon-pwd">Password</span>
+          <input class = "form-control" type='password' name = 'password' placeholder = '' aria-describedby="basic-addon-pwd" autocomplete="current-password" required>
+        </div>
+      </div>
+      
+      <div class = "form-group">
+        <input class="btn btn-primary btn-block btn-lg" type = 'submit' value='Login'></input>
+      </div>
+    </form>
+  </div>
+<div>
+<% include partials/footer %>

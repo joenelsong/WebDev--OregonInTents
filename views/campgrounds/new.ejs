@@ -1,0 +1,63 @@
+<% include ../partials/header %>
+
+
+<h1 style="text-align: center">Create a New Campground</h1>
+
+<div class="container formpage">
+  <div class="row">
+    <div style="width: 30%; margin: 30px auto;">
+      <form action="/campgrounds" method="POST">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input class="form-control" type="text" name="name" placeholder="Cascadia State Park" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="location">Location</label>
+          <input class="form-control" type="text" name="loc" id="loczzz" placeholder="Cascadia State Park, Cascadia, OR" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="price">Cost</label>
+          <input class="form-control" type="number" name="price" placeholder="$0" min="0" step="1" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="image">Link to Image URL</label>
+          <input class="form-control" type="text" name="image" placeholder="https://cdn.pixabay.com/photo/2017/03/24/02/40/camping-2169976_960_720.png">
+        </div> 
+        
+        <div class="form-group">
+          <label for="website">Website</label>
+          <input class="form-control" type="url" name="website" placeholder="http://oregonstateparks.org/index.cfm?do=parkPage.dsp_parkPage&parkId=150">
+        </div>
+        
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input class ="form-control" type="text" name="description" placeholder="description" required>
+        </div>
+        <div class="form-group">
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" name=secretCheckbox>
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Secret Campground</span>
+        </label>
+        </div>
+        <div class="form-group">
+          <label for="exampleTextarea">Additional Directions or Instructions</label>
+          <textarea name="directions" class="form-control" id="exampleTextarea" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-lg btn-primary btn-block">Submit!</button>
+        </div>
+
+      </form>
+    
+      <a href="/campgrounds">Go Back</a>
+      </div>
+  </div>
+
+</div>
+
+<% include ../partials/footer %>
