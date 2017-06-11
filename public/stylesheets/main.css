@@ -27,6 +27,28 @@ footer {
   width: 100%;
 }
 
-.container {
-  width: 95%;
+h2 {
+  width: 100%;
+  text-align: center;
+}
+
+/* style all input elements with a required attribute */
+.formpage input:required {
+  box-shadow: 1px 1px 6px rgba(200, 0, 0, 0.85);
+}
+/**
+ * style input elements that have a required
+ * attribute and a focus state
+ */
+.formpage input:required:focus {
+  border: 1px solid red;
+  outline: none;
+}
+
+/**
+ * style input elements that have a required
+ * attribute and a hover state
+ */
+.formpage input:required:hover {
+  opacity: 1;
 }

@@ -27,7 +27,11 @@ Technology Stack:
 * NEW     campgrounds/:id/comments/new    GET
 * CREATE  campgrounds/:id/comments/       POST
 
-Version 13: 
-* Installed Geocoder
-* Configured Google Maps API
-* Added Labels to New and Edit campground forms
+Version 14: 
+* Implemented reCaptcha V2 to verify human registrations and exclude robots (https://www.google.com/recaptcha)
+* Added Secret Campgrounds for members only
+* Deployed app on Heroku
+..* Need to configure Heroku app to connect to mlab database ( working on c9.io)
+..* Need to set google captcha domain for heroku app
+* Launched New MongoDB on https://mlab.com
+* Now have a Test Server and Production Database

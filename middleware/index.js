@@ -16,8 +16,9 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next) {
         req.flash('error', "Campground not found");
         res.redirect('back');
       } else {
-        // does user own campground?
-        if(foundCampground.author.id.equals(req.user._id)) { // must use .equals() === will not work because they are different objects
+        
+        // does user own campground? or is user administrator?
+        if(foundCampground.author.id.equals(req.user._id) || req.user.isAdmin) { // must use .equals() === will not work because they are different objects
           // authorize the edit
           next();
         } else {
@@ -43,8 +44,9 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
         req.flash('error', 'Cannot find comment');
         res.redirect('back');
       } else {
-        // does user own the comment?
-        if(foundComment.author.id.equals(req.user._id)) { // must use .equals() === will not work because they are different objects
+        
+        // does user own the comment? or is user an administrator?
+        if(foundComment.author.id.equals(req.user._id) || req.user.isAdmin) { // must use .equals() === will not work because they are different objects
           // authorize the edit
           next();
         } else {

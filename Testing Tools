@@ -1,0 +1,8 @@
+Testing tools:
+npm install locus
+npm install nodemon
+
+
+
+Make Admin via console:
+  db.users.update( {username: "joe" }, { $set: {isAdmin: true} } )

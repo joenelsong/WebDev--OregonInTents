@@ -1,12 +1,14 @@
 body {
   background-color: #000;
 }
-
+h1 {
+  padding: 1em;
+}
 #landing-header {
   z-index: 1;
   position: relative;
   text-align: center;
-  padding-top: 40vh;
+  padding-top: 35vh;
 }
 
 #landing-header h1 {
@@ -41,30 +43,29 @@ body {
 }
 
 .slideshow li:nth-child(1) {
-  background-image: url(http://i.imgur.com/yiKmOft.jpg);
+  background-image: url(../images/mountrobson.jpg);
   
 }
 .slideshow li:nth-child(2) {
-  background-image: url(http://i.imgur.com/jtJiVvT.jpg);
-  
+  background-image: url(../images/waterfall_rocks_day.jpg);
   animation-delay: 10s;
 }
 .slideshow li:nth-child(3) {
-  background-image: url(http://i.imgur.com/w0lWdfl.jpg);
+  background-image: url(../images/sunrise.jpg);
   animation-delay: 20s;
 }
 .slideshow li:nth-child(4) {
-  background-image: url(http://i.imgur.com/KpyC6VP.jpg);
+  background-image: url(../images/beach_day.jpg);
   animation-delay: 30s;
 }
 .slideshow li:nth-child(5) {
-  background-image: url(http://i.imgur.com/WRyQoAD.jpg);
+  background-image: url(../images/newzealand.jpg);
   animation-delay: 40s;
 }
 
 @keyframes imageAnimation {
   0% {
-    opacity: 0;
+    opacity: .0;
     animation-timing-function: ease-in;
   }
     10% {

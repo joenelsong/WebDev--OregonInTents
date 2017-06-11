@@ -14,12 +14,20 @@ var geocoder = require('geocoder');
 // INDEX  Route - show all campgrounds
 router.get("/campgrounds", function(req, res) {
   //console.log(req.user);
-  //Get all campgrounds from db
-  Campground.find({}, function(err, allCampgrounds) {
+  
+  //Get public campgrounds from db
+  Campground.find({isSecret: false}, function(err, publicCampgrounds) {
     if(err) {
       console.log('campgrounds.js >> ' + err);
     } else {
-      res.render("campgrounds/index", { campgrounds:allCampgrounds} );
+      //Get secret campgrounds from db    
+      Campground.find({isSecret: true}, function(err, secretCampgrounds) {
+        if(err) {
+          console.log('campgrounds.js >> ' + err);
+        } else {
+          res.render("campgrounds/index", { publicCampgrounds: publicCampgrounds, secretCampgrounds: secretCampgrounds, page: 'campgrounds'} );
+        }
+      });
     }
   });
 });
@@ -34,33 +42,45 @@ router.get("/campgrounds/new", myMiddleware.isLoggedIn, function(req, res){
 // CREATE Route - add new campground to DB
 router.post("/campgrounds", myMiddleware.isLoggedIn, function(req, res) {
   var name = req.body.name;
-  var image = req.body.image;
   var desc = req.body.description;
   var author = {
     id: req.user._id,
     username: req.user.username,
   }
   var price = req.body.price;
-  geocoder.geocode(req.body.location, function (err, data) {
-  var lat = data.results[0].geometry.location.lat;
-  var lng = data.results[0].geometry.location.lng;
-  var location = data.results[0].formatted_address;
-  })
-  
-  var website = req.body.website;
-  
-  var newCampground = {name: name, price: price, image: image, website: website, description: desc, author: author, location: location, lat: lat, lng: lng};
-
-  
-  // Create a new campground and save to DB
-  Campground.create(newCampground, function(err, newlyCreated){
+  geocoder.geocode(req.body.loc, function (err, data) {
+    var lat = data.results[0].geometry.location.lat;
+    var lng = data.results[0].geometry.location.lng;
+    var location = data.results[0].formatted_address;
     if(err) {
-      console.log('routes/campgrounds.js >> ' + err);
-    } else {
-      //redirect back to campgrounds page
-      console.log(newlyCreated);
-      res.redirect("/campgrounds"); // default is to redirect as a get request
+      console.log(err);
     }
+  
+    var image = req.body.image;
+    var website = req.body.website;
+    var instructions = req.body.directions;
+    
+    var isSecret = req.body.secretCheckbox;
+    console.log(isSecret + instructions);
+  
+    var newCampground = {name: name, price: price, website: website, description: desc, author: author, location: location, isSecret: isSecret, instructions: instructions,  lat: lat, lng: lng};
+    if (image.length > 0) {
+      newCampground.image = image;
+    }
+  
+    
+    // Create a new campground and save to DB
+    Campground.create(newCampground, function(err, newlyCreated){
+      if(err) {
+        console.log('routes/campgrounds.js >> ' + err);
+      } else {
+        //redirect back to campgrounds page
+        console.log(newlyCreated);
+        
+        req.flash('success', "Campground created successfully. Please review your campground details and feel free to make any changes");
+        res.redirect("/campgrounds/"+newlyCreated._id); // default is to redirect as a get request
+      }
+    });
   });
 });
 
@@ -74,7 +94,7 @@ router.get("/campgrounds/:id", function(req, res) {
       res.render("campgrounds");
     } else {
       //console.log(foundCampground);
-      console.log(foundCampground['website']);
+      //console.log(foundCampground['website']);
       //render show template with that acmpground
       res.render("campgrounds/show", {campground: foundCampground});
     }

@@ -7,7 +7,8 @@ var commentSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, // cannot use === with this id type against another String
         ref: "Comment"
     },
-    username: String
+    username: String,
+    dateCreated: {type: Date, default: Date.now}
   }
 });
 

@@ -3,13 +3,16 @@ var mongoose = require("mongoose");
 // SCHEMA SETUP
 var campgroundSchema = new mongoose.Schema({
   name: String,
-  price: String,
-  image: String,
+  price: {type: String, default: 'unknown'},
+  image: {type: String, default: 'https://lh4.googleusercontent.com/nuGvHcP2Yi7m8cs6sJdzM2hNmzn9hV8jG5wxeR6UJXj8khMjlLC_TUgrL5SiRifF_L5F6ZFR=w1920-h950-rw'},
   description: String,
   website: String,
   location: String,
   lat: Number,
   lng: Number,
+  dateCreated: {type: Date, default: Date.now},
+  isSecret: {type: Boolean, default: false},
+  instructions: String,
   author: {
             id: { 
                   type: mongoose.Schema.Types.ObjectId,
@@ -67,5 +70,15 @@ module.exports = Campground;
                 A short hike from the campground leads through lush forest to a 150 foot ribbon of Soda Creek known as Lower Soda Creek Falls. "
 
   }
+  
+  { name: "Fall Creek",
+    location: "Fall Creek State Recreation Area",
+    image: "http://oregonstateparks.org/index.cfm?do=main.loadImage&Image=Fall%20Creek%20State%20Recreation%20Area\fallcreek1020507.jpg",
+    price: "19.00",
+    website: "http://oregonstateparks.org/index.cfm?do=parkPage.dsp_parkPage&parkId=176",
+    description: "Cascara campground, on the upper end of the Fall Creek Arm of the lake, is tucked away amid towering Douglas fir trees.
+    This rustic campground offers 39 campsites, vault toilets, potable water, a launch ramp and swim area.  The first come, first served
+    campsites are private, with many having views of the lake.  Looking for a place to camp with your group? A lake front reservable RV group camp,
+    Fisherman's Point, is just across the road from Cascara campground."
   ]
 */

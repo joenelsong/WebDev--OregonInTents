@@ -1,14 +1,43 @@
 <% include partials/header %>
 
 
-<h1>Sign up!</h1>
+<div class="row formpage">
+  <h1 style="text-align: center">Sign up!</h1>
+  <div style= "width: 30%; margin: 25px auto;">
+    <form action='/register' onsubmit="return validatePasswords()" method='POST'>
+      
+      <div class = "form-group">
+        <label for="username">Username</label>
+        <input class = "form-control" type='text' name = 'username' placeholder = 'username' pattern="[a-z]{,24}" title="Lowercase characters only and 24 characters maximum" required>
+      </div>
+      
+      <div class = "form-group">
+        <label for="password">Password</label>
+        <input class = "form-control" type='password' name = 'password' placeholder = 'password' pattern=".{8,}" title="* minimum of 8 characters" required>
+        <label for="password">Re-enter Password</label>
+        <input class = "form-control" type='password' name = 'passwordVerify' placeholder = 'password' pattern=".{8,}" title="* minimum of 8 characters" required>
+      </div>
+         
+      <div class = "form-group">   
+        <label for="email">Email Address</label>
+        <input class = "form-control" type='email' name = 'email' placeholder = 'your@email.com' required>
+         <p>* email is used for password recovery</p>
+      </div>
+      
+      <div class = "form-group">
+        <div class="g-recaptcha" data-sitekey="6LeY4CQUAAAAAMSWbEG_zffmN3NQJIvgbR6TLMwP"></div>
+      </div>
+        
+      <div class = "form-group">
+        <input class="btn btn-primary btn-block btn-lg" type = 'submit' name='submit' value='Submit'></input>
+      </div>
+      
+      
+    </form>
+    <a href="/campgrounds">Go Back</a>
+    
+  </div>
+</div>
 
-
-<form action='/register' method='POST'>
-  <input type='text' name = 'username' placeholder = 'username'>
-  <input type='password' name = 'password' placeholder = 'password'>
-  <input type= 'submit' name='submit' value='submit'></input>
-</form>
-
-
+<script src="scripts/register.js"></script>
 <% include partials/footer %>
