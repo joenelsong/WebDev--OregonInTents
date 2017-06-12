@@ -4,10 +4,7 @@ var    passport     = require('passport');
 var User          = require('../models/user');
 
 var reCaptcha = { siteKey:'6LeY4CQUAAAAAMSWbEG_zffmN3NQJIvgbR6TLMwP',
-                  secretKey:'6LeY4CQUAAAAAMgXhZJrX3rirT0TPhamsGB'};
-                  
-
-
+                  secretKey:'6LeY4CQUAAAAAMgXhZJrX3rirT0TPhamsGB-IZLp'};
 var request           = require('request');
 
 
@@ -37,31 +34,36 @@ router.post('/register', function(req, res) {
  // g-recaptcha-response is the key that browser will generate upon form submit.
   // if its blank or null means user has not selected the captcha, so return the error.
   if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
-    req.flash('error', res.json({"responseCode" : 1,"responseDesc" : "Please select captcha"}) );
+    req.flash('error', "Please select captcha");
     return res.redirect('register');
     
   }
   // Put your secret key here.
   var secretKey = "--paste your secret key here--";
   // req.connection.remoteAddress will provide IP address of connected user.
+  console.log(reCaptcha.secretKey);
   var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + reCaptcha.secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
   // Hitting GET request to the URL, Google will respond with success or error scenario.
   request(verificationUrl,function(error,response,body) {
     body = JSON.parse(body);
+    console.log(body);
     // Success will be true or false depending upon captcha validation.
     if(body.success !== undefined && !body.success) {
-       req.flash('error', res.json({"responseCode" : 1,"responseDesc" : "Failed captcha verification"}) );
-      return res.redirect('register');
+       req.flash('error', "Failed captcha verification");
+       return res.redirect('register');
        
     }
     // If successful, continue processing registration.
     //res.json({"responseCode" : 0,"responseDesc" : "Sucess"});
+    // ==================
+    // Create New User
+    // ==================
     var newUser = new User( {username: req.body.username} );  // Must use username as that's what passport is expecting, otherwise Bad Request http error.
     User.register(newUser, req.body.password, function(err, user) {
       if(err){
         console.log(err);
         req.flash('error', err.message); // below causes flash message, don't need this.
-        return res.redirect('register'); // will cause flash message, so don't need above.
+        return; // will cause flash message, so don't need above.
       }
       
       console.log("New User Registered: " + newUser);
