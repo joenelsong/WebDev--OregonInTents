@@ -50,28 +50,28 @@ app.use(function(req, res, next) {
     
 
     
-
 // ==========================
 // Connect to Mongo Database
 // ==========================
 
 //seedDB(); // seed the database -- broken, just deletes for now
 mongoose.Promise = global.Promise;
-//mongoose.connect("mongodb://localhost/OregonInTents13");  // test database
 
 var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
                 replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };   
 
-var contents = fs.readFileSync("Credentials.json"); // Get credentials from file
+/*var contents = fs.readFileSync("Credentials.json"); // Get credentials from file
 var jsonContent = JSON.parse(contents); // Define to JSON type
 var mongoServer = jsonContent.testServer;
-//var mongoServer = jsonContent.productionServer;
-
+var mongoServer = jsonContent.productionServer;
 var mongodbUri = "mongodb://"+mongoServer.username+":"+mongoServer.password+"@"+mongoServer.server;
-
-console.log(mongodbUri);
 mongoose.connect(mongodbUri, options);
-var conn = mongoose.connection;             
+*/
+mongoose.connect(process.env.TEST_DATABASE, options);
+mongoose.connect(process.env.PRODUCTION_DATABASE, options);
+var conn = mongoose.connection;
+
+process.env.databaseURL
  
 conn.on('error', console.error.bind(console, 'connection error:'));  
  
