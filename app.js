@@ -56,6 +56,8 @@ app.use(function(req, res, next) {
 
 //seedDB(); // seed the database -- broken, just deletes for now
 mongoose.Promise = global.Promise;
+//mongoose.connect("mongodb://localhost/OregonInTents13");  // local test database
+// Other test database is on mLab.
 
 var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } }, 
                 replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } } };   
@@ -67,8 +69,8 @@ var mongoServer = jsonContent.productionServer;
 var mongodbUri = "mongodb://"+mongoServer.username+":"+mongoServer.password+"@"+mongoServer.server;
 mongoose.connect(mongodbUri, options);
 */
-mongoose.connect(process.env.TEST_DATABASE, options);
-mongoose.connect(process.env.PRODUCTION_DATABASE, options);
+mongoose.connect(process.env.DATABASE_URL, options);
+
 var conn = mongoose.connection;
 
 process.env.databaseURL
