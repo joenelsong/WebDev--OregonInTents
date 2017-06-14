@@ -8,11 +8,15 @@ h1 {
   z-index: 1;
   position: relative;
   text-align: center;
-  padding-top: 35vh;
+  padding-top: 30vh;
 }
 
 #landing-header h1 {
   color: #fff;
+}
+#landing-header h3 {
+  color: #ccc;
+  margin-bottom: 2em;
 }
 
 .slideshow { 
