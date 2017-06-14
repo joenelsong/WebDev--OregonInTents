@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var    passport     = require('passport');
+var passport     = require('passport');
 var User          = require('../models/user');
 
 var reCaptcha = { siteKey:'6LeY4CQUAAAAAMSWbEG_zffmN3NQJIvgbR6TLMwP',
@@ -58,8 +58,8 @@ router.post('/register', function(req, res) {
     // ==================
     // Create New User
     // ==================
-    var newUser = new User( {username: req.body.username} );  // Must use username as that's what passport is expecting, otherwise Bad Request http error.
-    User.register(newUser, req.body.password, function(err, user) {
+    var newUser = new User( {username: req.body.username, email: req.body.email} );  // Must use username as that's what passport is expecting, otherwise Bad Request http error.
+    User.register(newUser, req.body.password,  function(err, user) {
       if(err){
         console.log(err);
         req.flash('error', err.message); // below causes flash message, don't need this.

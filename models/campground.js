@@ -10,6 +10,10 @@ var campgroundSchema = new mongoose.Schema({
   location: String,
   lat: Number,
   lng: Number,
+  city: String,
+  county: String,
+  state: String,
+  country: String,
   dateCreated: {type: Date, default: Date.now},
   isSecret: {type: Boolean, default: false},
   instructions: String,
@@ -25,7 +29,15 @@ var campgroundSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId, // association by reference
       ref: "Comment"
     }
-    ]
+    ],
+ ratings: [
+      {
+         type: mongoose.Schema.Types.ObjectId,
+         ref: "Rating"
+      }
+   ],
+   rating: { type: Number, default: 0 }
+  
 });
 
 var Campground = mongoose.model("Campground", campgroundSchema); // model

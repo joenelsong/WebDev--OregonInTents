@@ -21,11 +21,7 @@ footer {
   display: inline;
 }
 
-/* Google Maps */
-#map {
-  height: 400px;
-  width: 100%;
-}
+
 
 h2 {
   width: 100%;
@@ -51,4 +47,43 @@ h2 {
  */
 .formpage input:required:hover {
   opacity: 1;
+}
+
+
+/* Google Maps */
+#map {
+  height: 400px;
+  width: 100%;
+}
+/* Google Maps */
+.aw-current-weather-info {
+  height: 400px;
+  width: 100%;
+}
+
+
+.list-group-item {
+  cursor: pointer; cursor: hand; 
+  text-align: center;
+  font-size: 150%;
+  opacity: 0.8;
+  color: #fff;
+  background-color: gray;
+  border: none;
+  border-radius: 15px;
+  margin-bottom: 0.3em;
+}
+
+.list-group-item:hover {
+  background-color: #417cb8;
+
+}
+.list-group-item:active {
+  background-color: #417cb8;
+  box-shadow: 0 5px #27496d;
+  transform: translateY(5px);
+}
+
+.list-group-item + div {
+  margin-bottom: 0.75em;
 }

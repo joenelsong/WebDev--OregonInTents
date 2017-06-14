@@ -3,13 +3,19 @@
     
     <!-- Side Bar -->
     <div class="col-md-3"> 
-      <p class="lead">TentCampOregon</p>
       <div class="list-group">
-        <li class="list-group-item active">Info 1</li>
-        <li class="list-group-item">Info 2</li>
-        <li class="list-group-item">Info 3</li>
+        <li id = "mapLi" class="list-group-item active">Map</li>
+        <div id="map"></div>
+        
+        <li id = weatherLi class="list-group-item">Weather Forecast</li>
+          <div id = "weather">
+            <a href="https://www.accuweather.com/en/us/eugene-or/97401/current-weather/330145" class="aw-widget-legal"></a>
+            <div style="margin-right: 50px" id="awtd1497313088750" class="aw-widget-36hour"  data-locationkey="" data-unit="f" data-language="en-us" data-useip="true" data-uid="awtd1497313088750" data-editlocation="true"></div>
+            <script type="text/javascript" src="https://oap.accuweather.com/launch.js"></script>
+          </div>
+
       </div>
-      <div id="map"></div>
+      
     </div>
     
     <!------------------------
@@ -19,8 +25,9 @@
       <div class="thumbnail">
         <img class="img-responsive" src="<%=campground.image%>">
         <div class="caption-full">
-          <h4 class="pull-right">$<%= campground.price %>/night</h4>
-          <h4><a href="<%= campground.website %>"><%= campground.name %></a></h4>
+          <h3 class="pull-right">$<%= campground.price %>/night</h3>
+          <h3><a href="<%= campground.website %>"><%= campground.name %></a></h3>
+          <h4 id="cityStateHeader"><%= campground.city + ", " + campground.state %></h4>
           <p><%= campground.description %></p>
           <p>
             <em>Submitted by: <%= campground.author.username %>, <%= moment(campground.dateCreated).fromNow() %></em>
@@ -33,7 +40,7 @@
               <button class = "btn btn-sm btn-danger">Delete</button>
             </form>
             <% } %>
-            
+        
         </div>
       </div>
       
@@ -103,6 +110,9 @@
     });
   }
 </script>
+
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMLJFpf_-liA_kmXLuSAnYufeY3xrnVBI&callback=initMap"></script>
+<script src="../scripts/campgrounds/showpage.js"></script>
+
 
 <% include ../partials/footer %>

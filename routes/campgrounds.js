@@ -41,20 +41,32 @@ router.get("/campgrounds/new", myMiddleware.isLoggedIn, function(req, res){
 
 // CREATE Route - add new campground to DB
 router.post("/campgrounds", myMiddleware.isLoggedIn, function(req, res) {
-  var name = req.body.name;
+  var name = titleCase(req.body.name);
   var desc = req.body.description;
   var author = {
     id: req.user._id,
     username: req.user.username,
   }
   var price = req.body.price;
+  
+  
+  // Get Geo Spatial Data from geocoder
   geocoder.geocode(req.body.loc, function (err, data) {
     var lat = data.results[0].geometry.location.lat;
     var lng = data.results[0].geometry.location.lng;
     var location = data.results[0].formatted_address;
+
     if(err) {
       console.log(err);
     }
+    
+    var addCount = data.results[0].address_components.length;
+   
+    var city=data.results[0].address_components[addCount-5]['long_name'];
+    var county=data.results[0].address_components[addCount-4]['long_name'];
+    var state=data.results[0].address_components[addCount-3]['long_name'];
+    var country=data.results[0].address_components[addCount-2]['long_name'];
+    
   
     var image = req.body.image;
     var website = req.body.website;
@@ -63,12 +75,13 @@ router.post("/campgrounds", myMiddleware.isLoggedIn, function(req, res) {
     var isSecret = req.body.secretCheckbox;
     console.log(isSecret + instructions);
   
-    var newCampground = {name: name, price: price, website: website, description: desc, author: author, location: location, isSecret: isSecret, instructions: instructions,  lat: lat, lng: lng};
+    var newCampground = { name: name, price: price, website: website, description: desc, author: author, 
+                          location: location, lat: lat, lng: lng, city: city, state: state, county: county, country: country,
+                          isSecret: isSecret, instructions: instructions };
     if (image.length > 0) {
       newCampground.image = image;
     }
   
-    
     // Create a new campground and save to DB
     Campground.create(newCampground, function(err, newlyCreated){
       if(err) {
@@ -77,11 +90,11 @@ router.post("/campgrounds", myMiddleware.isLoggedIn, function(req, res) {
         //redirect back to campgrounds page
         console.log(newlyCreated);
         
-        req.flash('success', "Campground created successfully. Please review your campground details and feel free to make any changes");
+        req.flash('success', "Campground created successfully. Please review your campground details and feel free to make any changes/updates at any time");
         res.redirect("/campgrounds/"+newlyCreated._id); // default is to redirect as a get request
       }
     });
-  });
+  }); // END geocoder.geocode(req.body.loc, function (err, data) {
 });
 
 
@@ -147,7 +160,10 @@ router.delete('/campgrounds/:id', myMiddleware.checkCampgroundOwnership, functio
 });
 
 
-
+function titleCase(str)
+{
+ return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+}
 
 
 module.exports = router;
