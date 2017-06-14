@@ -4,7 +4,7 @@ var mongoose = require("mongoose");
 var campgroundSchema = new mongoose.Schema({
   name: String,
   price: {type: String, default: 'unknown'},
-  image: {type: String, default: 'https://lh4.googleusercontent.com/nuGvHcP2Yi7m8cs6sJdzM2hNmzn9hV8jG5wxeR6UJXj8khMjlLC_TUgrL5SiRifF_L5F6ZFR=w1920-h950-rw'},
+  image: {type: String, default: 'http://localhost:3000/images/default-tent.png'},
   description: String,
   website: String,
   location: String,
