@@ -51,23 +51,30 @@ router.post("/campgrounds", myMiddleware.isLoggedIn, function(req, res) {
   
   
   // Get Geo Spatial Data from geocoder
-  geocoder.geocode(req.body.loc, function (err, data) {
-    var lat = data.results[0].geometry.location.lat;
-    var lng = data.results[0].geometry.location.lng;
-    var location = data.results[0].formatted_address;
-
+  var state = "Oregon";
+  var geoLocationString = req.body.name + " " + req.body.city + ", " + state;
+  geocoder.geocode(geoLocationString, function (err, data) {
+    
     if(err) {
       console.log(err);
+      return;
+    } 
+    
+    if (data.results.address_components)  {
+      console.log(data.results[0].address_components);
+      
+      var lat = data.results[0].geometry.location.lat;
+      var lng = data.results[0].geometry.location.lng;
+      var location = data.results[0].formatted_address;
     }
     
-    var addCount = data.results[0].address_components.length;
-   
-    var city=data.results[0].address_components[addCount-5]['long_name'];
-    var county=data.results[0].address_components[addCount-4]['long_name'];
-    var state=data.results[0].address_components[addCount-3]['long_name'];
-    var country=data.results[0].address_components[addCount-2]['long_name'];
+    //var addCount = data.results[0].address_components.length;
+    // var city=data.results[0].address_components[1]['long_name'];
+    // var county=data.results[0].address_components[2]['long_name'];
+    // var state=data.results[0].address_components[3]['long_name'];
     
   
+    var city = req.body.city;
     var image = req.body.image;
     var website = req.body.website;
     var instructions = req.body.directions;
@@ -76,7 +83,7 @@ router.post("/campgrounds", myMiddleware.isLoggedIn, function(req, res) {
     console.log(isSecret + instructions);
   
     var newCampground = { name: name, price: price, website: website, description: desc, author: author, 
-                          location: location, lat: lat, lng: lng, city: city, state: state, county: county, country: country,
+                          location: location, lat: lat, lng: lng, city: city, state: state,
                           isSecret: isSecret, instructions: instructions };
     if (image.length > 0) {
       newCampground.image = image;

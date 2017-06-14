@@ -28,11 +28,13 @@ h2 {
   text-align: center;
 }
 
+.formpage {
+  width: 80%;
+  margin: 30px auto;
+}
 /* style all input elements with a required attribute */
 .formpage input:required {
   box-shadow: 1px 1px 6px rgba(200, 0, 0, 0.85);
-  width: 100%;
-  margin: 30px auto;
 }
 /**
  * style input elements that have a required
