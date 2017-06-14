@@ -14,13 +14,13 @@
         </div>
         
         <div class="form-group">
-          <label for="location">Location</label>
-          <input class="form-control" type="text" name="campgroundForm[location]" id="location" value="<%= campground.location %>"  required>
+          <label for="location">City/Town</label>
+          <input class="form-control" type="text" name="campgroundForm[city]" id="location" value="<%= campground.city %>"  required>
         </div>
         
         <div class="form-group">
           <label for="price">Price</label>
-          <input class="form-control" type="number" name="campgroundForm[price]" value = "<%= campground.price %>" min="0" step="1" required>
+          <input class="form-control" type="number" name="campgroundForm[price]" value = "<%= campground.price %>" min="0" step="1">
         </div>
         <div class="form-group">
           <label for="image">Image URL</label>

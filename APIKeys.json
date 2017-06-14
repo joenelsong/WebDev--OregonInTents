@@ -1,0 +1,21 @@
+
+var GOOGLE_MAPS = { "Project": "OregonInTents"
+                  "Key": "AIzaSyBMLJFpf_-liA_kmXLuSAnYufeY3xrnVBI"
+                  "Url": "https://console.developers.google.com/apis/credentials/key/175?authuser=0&project=oregonintents-1496785780055&pli=1"
+};
+
+var GOOGLE_ELEVATION = { "Project" : "OregonInTents",
+                        "Key" : "AIzaSyC3mMgIzUvIRoSpXTkFVHgP1PDTkUCrelM",
+                        "Url" : ""
+};
+  
+var GOOGLE_RECAPTCHA: {  "Site Key": "6LeY4CQUAAAAAMSWbEG_zffmN3NQJIvgbR6TLMwP",
+                        "Private Key": "6LeY4CQUAAAAAMgXhZJrX3rirT0TPhamsGB"
+};
+
+
+
+
+
+
+

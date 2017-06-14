@@ -48,6 +48,7 @@ router.post("/campgrounds", myMiddleware.isLoggedIn, function(req, res) {
     username: req.user.username,
   }
   var price = req.body.price;
+  var location ='zz';
   
   
   // Get Geo Spatial Data from geocoder
@@ -60,13 +61,13 @@ router.post("/campgrounds", myMiddleware.isLoggedIn, function(req, res) {
       return;
     } 
     
-    if (data.results.address_components)  {
-      console.log(data.results[0].address_components);
-      
-      var lat = data.results[0].geometry.location.lat;
-      var lng = data.results[0].geometry.location.lng;
-      var location = data.results[0].formatted_address;
-    }
+      if (data.results.length > 0) {
+        console.log(data.results[0].address_components);
+        
+        var lat = data.results[0].geometry.location.lat;
+        var lng = data.results[0].geometry.location.lng;
+        location = data.results[0].formatted_address;
+      }
     
     //var addCount = data.results[0].address_components.length;
     // var city=data.results[0].address_components[1]['long_name'];
@@ -132,12 +133,24 @@ router.get('/campgrounds/:id/edit', myMiddleware.checkCampgroundOwnership, funct
 
 // UPDATE Route - 
 router.put('/campgrounds/:id', myMiddleware.checkCampgroundOwnership, function(req, res){
-  geocoder.geocode(req.body.campgroundForm['location'], function (err, data) {
-    var lat = data.results[0].geometry.location.lat;
-    var lng = data.results[0].geometry.location.lng;
-    var location = data.results[0].formatted_address;
+  // Get Geo Spatial Data from geocoder
+  var state = "Oregon";
+  var geoLocationString = req.body.campgroundForm.name + " " + req.body.campgroundForm.city + ", " + state;
+  //console.log(geoLocationString);
+  geocoder.geocode(geoLocationString, function (err, data) {
     
-    var newData = Object.assign(req.body.campgroundForm, {lat: lat, lng: lng});
+    if(err) {
+      console.log(err);
+      return;
+    } 
+    //console.log(data);
+      console.log(data.results[0].address_components);
+      
+      var lat = data.results[0].geometry.location.lat;
+      var lng = data.results[0].geometry.location.lng;
+      var location = data.results[0].formatted_address;
+    
+    var newData = Object.assign(req.body.campgroundForm, {lat: lat, lng: lng, location: location} );
     console.log(newData);
       
     // find and update the specified campground
