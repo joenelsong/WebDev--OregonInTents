@@ -77,6 +77,9 @@ h2 {
   border-radius: 15px;
   margin-bottom: 0.3em;
 }
+.list-group-item:first-child {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 
 .list-group-item:hover {
   background-color: #417cb8;
@@ -89,5 +92,4 @@ h2 {
 }
 
 .list-group-item + div {
-  margin-bottom: 0.75em;
 }

@@ -17,7 +17,10 @@
           <label for="location">City/Town</label>
           <input class="form-control" type="text" name="campgroundForm[city]" id="location" value="<%= campground.city %>"  required>
         </div>
-        
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input class ="form-control" type="text" name="campgroundForm[description]" value = "<%= campground.description %>" required>
+        </div>
         <div class="form-group">
           <label for="price">Price</label>
           <input class="form-control" type="number" name="campgroundForm[price]" value = "<%= campground.price %>" min="0" step="1">
@@ -31,9 +34,17 @@
           <input class="form-control" type="url" name="campgroundForm[website]" value = "<%= campground.website %>">
         </div>
         <div class="form-group">
-          <label for="description">Description</label>
-          <input class ="form-control" type="text" name="campgroundForm[description]" value = "<%= campground.description %>" required>
+        <label class="custom-control custom-checkbox">
+          <input type="checkbox" class="custom-control-input" name=campgroundForm[secretCheckbox]>
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">Secret Campground</span>
+        </label>
         </div>
+        <div class="form-group">
+          <label for="exampleTextarea">Additional Directions or Instructions</label>
+          <textarea name="campgroundForm[directions]" class="form-control" id="exampleTextarea" rows="3"></textarea>
+        </div>
+       
         <div class="form-group">
           <button class="btn btn-lg btn-primary btn-block">Submit!</button>
         </div>
