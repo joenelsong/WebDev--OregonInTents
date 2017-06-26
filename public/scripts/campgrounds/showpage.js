@@ -20,7 +20,7 @@ document.getElementById("weatherLi").addEventListener("click", function(){
     widget.style['margin-right'] = "0px"// resize widget
     
     document.getElementById("link_get_widget").style.display="none"  // hide UI glitches
-    document.querySelector(".aw-search").style.display="none";
+    //document.querySelector(".aw-search").style.display="none";
     
   }, 1500);
 
