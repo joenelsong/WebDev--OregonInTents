@@ -13,6 +13,9 @@ router.get("/", function(req, res) {
   res.render("landing");
 });
 
+router.get("/members", function(req, res) {
+  res.render("members");
+});
 
 // ==============
 // AUTH ROUTES
