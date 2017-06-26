@@ -48,7 +48,7 @@ router.post("/campgrounds", myMiddleware.isLoggedIn, function(req, res) {
     username: req.user.username,
   }
   var price = req.body.price;
-  var location ='zz';
+  var location ='';
   
   
   // Get Geo Spatial Data from geocoder
@@ -134,6 +134,7 @@ router.get('/campgrounds/:id/edit', myMiddleware.checkCampgroundOwnership, funct
 // UPDATE Route - 
 router.put('/campgrounds/:id', myMiddleware.checkCampgroundOwnership, function(req, res){
   // Get Geo Spatial Data from geocoder
+  var location ='';
   var state = "Oregon";
   var geoLocationString = req.body.campgroundForm.name + " " + req.body.campgroundForm.city + ", " + state;
   //console.log(geoLocationString);
@@ -143,12 +144,15 @@ router.put('/campgrounds/:id', myMiddleware.checkCampgroundOwnership, function(r
       console.log(err);
       return;
     } 
-    //console.log(data);
+    
+    if (data.results.length > 0) {
       console.log(data.results[0].address_components);
       
       var lat = data.results[0].geometry.location.lat;
       var lng = data.results[0].geometry.location.lng;
-      var location = data.results[0].formatted_address;
+      location = data.results[0].formatted_address;
+    }
+    
     
     var newData = Object.assign(req.body.campgroundForm, {lat: lat, lng: lng, location: location} );
     console.log(newData);
