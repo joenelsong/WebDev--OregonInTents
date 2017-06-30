@@ -2,7 +2,7 @@ body {
   background-color: #000;
 }
 h1 {
-  padding: 1em;
+  padding: 0.25em;
 }
 #landing-header {
   z-index: 1;
@@ -13,10 +13,15 @@ h1 {
 
 #landing-header h1 {
   color: #fff;
+  font-size: 400%;
 }
 #landing-header h3 {
   color: #ccc;
   margin-bottom: 2em;
+}
+
+#landing-header .btn {
+  font-size: 200%;
 }
 
 .slideshow { 

@@ -14,7 +14,7 @@ router.get("/", function(req, res) {
 });
 
 router.get("/members", function(req, res) {
-  res.render("members");
+  res.render("members", {page: 'members'});
 });
 
 // ==============

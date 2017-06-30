@@ -1,4 +1,32 @@
 <% include ../partials/header.ejs %>
+
+  <!-- Campground Awaiting Approval UI -->
+    <% if( currentUser && (currentUser.isMember) && (!campground.adminApproved) ) { %>
+      <div class = "row">
+    
+        <div class="col-md-8">
+          <h1 class="unreviewed" title="Please Review this item to earn member points and help OregonInTents">This Campground Is Awaiting Review</h1>
+        </div>
+        
+        <div class="col-md-4">
+          <form class="review-button" action="/campgrounds/<%= campground._id %>/approve?_method=PUT" method="POST">
+            <button class="btn btn-lg btn-success review-button">APPROVE</button>
+          </form>
+          
+          <form class ="review-button" action="/campgrounds/<%= campground._id %>/reject?_method=PUT" method="POST">
+            <button class="btn btn-lg btn-danger review-button">REJECT</button>
+          </form>
+        </div>
+        
+      </div>
+        
+        
+    <% } %>
+    
+    
+ 
+
+
   <div class="row">
     
     <!-- Side Bar -->
@@ -17,6 +45,10 @@
       </div>
       
     </div>
+    
+    
+   
+    
     
     <!------------------------
             Main Content

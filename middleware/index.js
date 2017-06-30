@@ -35,6 +35,28 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next) {
   
 };
 
+// Campground Review Authorization Check
+middlewareObj.checkMembership = function(req, res, next) {
+  // is a user logged in?
+  if(req.isAuthenticated()) { 
+        
+    // does user own campground? or is user administrator?
+    if(req.user.isMember) { // must use .equals() === will not work because they are different objects
+      // authorize the edit
+      next();
+    } else {
+      // Deny access to edit and reload page
+      req.flash('error', "You must be a member to do that!");
+      res.redirect("back");
+    }
+
+  } else {
+    req.flash('error', "Hmm, You should be logged in to find this page");
+    res.redirect('back'); // takes user back to where they came from
+  }
+  
+};
+
 // Comment Authorization Check Function
 middlewareObj.checkCommentOwnership = function(req, res, next) {
   // is a user logged in?

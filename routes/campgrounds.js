@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Campground = require("../models/campground");
+var User = require("../models/user");
 
 var myMiddleware = require('../middleware'); // node will automatically require index.js because it is named index.js
 var geocoder = require('geocoder');
@@ -168,6 +169,7 @@ router.put('/campgrounds/:id', myMiddleware.checkCampgroundOwnership, function(r
         res.redirect('/campgrounds/' + req.params.id);
       }
     });
+
   });
 });
 
@@ -182,6 +184,83 @@ router.delete('/campgrounds/:id', myMiddleware.checkCampgroundOwnership, functio
     }
   });
 });
+
+// REVIEW::APPROVE Route - 
+router.put('/campgrounds/:id/approve', myMiddleware.checkMembership, function(req, res){
+  // find and update the specified campground
+  Campground.findByIdAndUpdate(req.params.id, {$set: {adminApproved : true} }, function(err, updatedCampground) {
+    if(err){
+      req.flash('error', err.message);
+      res.redirect('/campgrounds');
+    } else {
+        // Award points to Reviewing user
+        if (awardPublicPoints(req.user._id, 1) === false) {
+          console.log("awardPublicPoints FAILED!");
+        }
+        // Award points to submitting user
+        if (awardPublicPoints(updatedCampground.author.id, 2) === false) {
+          console.log("awardPublicPoints FAILED!");
+        }
+        //redirect to show page
+        req.flash('success', 'Campground has been successfully Approved! \n+1 Forest Power!');
+        res.redirect('/campgrounds/' + req.params.id);
+        
+    }
+  });
+
+});
+
+// REVIEW::REJECT Route - 
+router.put('/campgrounds/:id/reject', myMiddleware.checkMembership, function(req, res){
+  Campground.findById(req.params.id, function(err, foundCampground) {
+    if(err){
+      req.flash('error', err.message);
+      res.redirect('/campgrounds');
+    } else {
+      if (foundCampground.hasBeenReviewed === false) { // if false then campground has not yet been reviewed
+      
+        // Delete Campground because it has been rejected
+        Campground.findByIdAndRemove(req.params.id, function(err) {
+          if(err) {
+            res.redirect("/campgrounds");
+          } else {
+                // Award points to user
+            if (awardPublicPoints(req.user._id, 1) === false) {
+              console.log("awardPublicPoints FAILED!");
+            }
+            req.user.publicPoints = 1;
+            req.flash('success', "The campground has been rejected \n+1 Forest Power!");
+            res.redirect("/campgrounds");
+          }
+        });
+
+      }
+    }
+    
+  });
+
+});
+
+function awardPublicPoints(user_id, amt) {
+  
+  User.findById(user_id, function(err, foundUser) {
+    if(err) {
+      console.log("can't find user");
+      return false;
+    }
+    var newPointTotal = foundUser.publicPoints + amt;
+    User.findByIdAndUpdate(user_id, {$set: {publicPoints : newPointTotal} }, function(err, foundUser) {
+      if(err){
+        console.log(err);
+      }
+   });
+
+    
+  });
+  
+
+  
+}
 
 
 function titleCase(str)

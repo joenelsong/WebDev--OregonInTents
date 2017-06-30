@@ -2,8 +2,10 @@ var mongoose = require("mongoose");
 
 // SCHEMA SETUP
 var campgroundSchema = new mongoose.Schema({
+  hasBeenReviewed: {type: Boolean, default: false},
+  adminApproved: {type: Boolean, default: false},
   name: String,
-  price: {type: String, default: 'unknown'},
+  price: {type: String, default: '?'},
   image: {type: String, default: 'images/default-tent.png'},
   description: String,
   website: String,
