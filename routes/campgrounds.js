@@ -249,10 +249,18 @@ function awardPublicPoints(user_id, amt) {
       return false;
     }
     var newPointTotal = foundUser.publicPoints + amt;
-    User.findByIdAndUpdate(user_id, {$set: {publicPoints : newPointTotal} }, function(err, foundUser) {
+    var updateObj = {publicPoints: newPointTotal}
+     //Check to see if user has more than 10 points, if so promote to member
+    if (!foundUser.isMember && newPointTotal >= 10) {
+      updateObj.isMember = true;
+    }
+    
+    User.findByIdAndUpdate(user_id, {$set: updateObj }, function(err, foundUser) {
       if(err){
         console.log(err);
       }
+      
+     
    });
 
     

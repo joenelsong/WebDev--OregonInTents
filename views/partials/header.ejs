@@ -39,9 +39,11 @@
               <li><a href="/login">Login</a></li>
               <li><a href="/register">Sign Up</a></li>
               <% } else { %>
-                <li><a>
+                <li><a id="userHeaderDisplay">
                   <% if (currentUser.isAdmin) { %>
                     <i class="fa fa-gavel" aria-hidden="true" style="color: brown;"></i>
+                  <% } else if (currentUser.isMember)  { %>
+                    <i class="fa fa-user-secret" aria-hidden="true"></i>
                   <% } else { %>
                     <i class="fa fa-user-o" aria-hidden="true"></i>
                   <% } %>
