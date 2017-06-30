@@ -6,3 +6,8 @@ npm install nodemon
 
 Make Admin via console:
   db.users.update( {username: "joe" }, { $set: {isAdmin: true} } )
+  
+  
+Environment Variables on c9.io:
+$> export DATABASE_URL=mongodb://localhost/yelp_capm_v10
+$> export DATABASE_URL=mongodb://testDBA:testDBA@ds119772.mlab.com:19772/test_oregonintents

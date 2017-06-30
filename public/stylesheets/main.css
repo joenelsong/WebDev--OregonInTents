@@ -4,11 +4,16 @@
   width: 100%;
   z-index: 100;
 }
+#flashMessageContainer {
+  margin-top: 60px;
+  
+}
+
 #userHeaderDisplay {
   font-size: 120%;
 }
 .jumbotron {
-  margin-top: 6em;
+  margin-top: 2em;
 }
 
 

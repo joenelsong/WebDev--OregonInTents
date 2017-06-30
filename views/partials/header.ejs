@@ -62,7 +62,7 @@
   </nav>
 
   <!-- User Feedback Flash Messages -->
-  <div class = 'container'>
+  <div id = "flashMessageContainer" class = 'container'>
     <% if(errorMessage && errorMessage.length > 0) { %>
       <div class="alert alert-danger"><%= errorMessage %></div>
     <% } %>
