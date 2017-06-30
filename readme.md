@@ -4,9 +4,15 @@ Technology Stack:
 * Express.js
 * EJS.js templates
 * MongoDB/Mongoose
+* Passport JS Login
+* Connect-Flash Flash Messages
 
-* HTML5
-* CSS3 w/ bootstrap.css
+
+* Google reCaptcha
+* Google Maps API
+* AccuWeather API
+
+* Bootstrap.css
 
 # RESTFUL ROUTES
 
