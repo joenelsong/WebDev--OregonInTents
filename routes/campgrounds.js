@@ -186,7 +186,7 @@ router.delete('/campgrounds/:id', myMiddleware.checkCampgroundOwnership, functio
 });
 
 // REVIEW::APPROVE Route - 
-router.put('/campgrounds/:id/approve', myMiddleware.checkMembership, function(req, res){
+router.put('/campgrounds/:id/approve', myMiddleware.checkMembership, myMiddleware.checkNotCampgroundOwnership, function(req, res){
   // find and update the specified campground
   Campground.findByIdAndUpdate(req.params.id, {$set: {adminApproved : true} }, function(err, updatedCampground) {
     if(err){
@@ -211,7 +211,7 @@ router.put('/campgrounds/:id/approve', myMiddleware.checkMembership, function(re
 });
 
 // REVIEW::REJECT Route - 
-router.put('/campgrounds/:id/reject', myMiddleware.checkMembership, function(req, res){
+router.put('/campgrounds/:id/reject', myMiddleware.checkMembership, myMiddleware.checkNotCampgroundOwnership, function(req, res){
   Campground.findById(req.params.id, function(err, foundCampground) {
     if(err){
       req.flash('error', err.message);

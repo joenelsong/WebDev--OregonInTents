@@ -35,6 +35,36 @@ middlewareObj.checkCampgroundOwnership = function(req, res, next) {
   
 };
 
+
+middlewareObj.checkNotCampgroundOwnership = function(req, res, next) {
+  // is a user logged in?
+  if(req.isAuthenticated()) { 
+    Campground.findById(req.params.id, function(err, foundCampground){
+      if(err) {
+        req.flash('error', "Campground not found");
+        res.redirect('back');
+      } else {
+        
+        // does user own campground? or is user administrator?
+        if(!foundCampground.author.id.equals(req.user._id) || req.user.isAdmin) { // must use .equals() === will not work because they are different objects
+          // authorize the edit
+          next();
+        } else {
+          // Deny access to edit and reload page
+          req.flash('error', "You don't have permission to do that!");
+          res.redirect("back");
+        }
+      }
+  });
+  } else {
+    req.flash('error', "Hmm, You should be logged in to find this page");
+    res.redirect('back'); // takes user back to where they came from
+  }
+  
+};
+
+
+
 // Campground Review Authorization Check
 middlewareObj.checkMembership = function(req, res, next) {
   // is a user logged in?
@@ -56,6 +86,7 @@ middlewareObj.checkMembership = function(req, res, next) {
   }
   
 };
+
 
 // Comment Authorization Check Function
 middlewareObj.checkCommentOwnership = function(req, res, next) {
