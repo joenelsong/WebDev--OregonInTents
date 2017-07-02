@@ -36,6 +36,9 @@ Technology Stack:
 TO DO:
 * Password Reset
 * User Profiles
+* Add Filters
+- Sort campgrounds by Rating
+- Sort campgrounds by Distance
 * Stripe Payment / Bitcoin Donation Links
-* Implement rating system
-** Make a cron job to automatically delete entries with very low ratings that have existed for a certain period of time.
+* Implement campground rating system
+- Make a cron job to automatically delete entries with very low ratings that have existed for a certain period of time.
