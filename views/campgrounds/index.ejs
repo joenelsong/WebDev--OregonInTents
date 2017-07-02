@@ -10,14 +10,14 @@
 <!-------------------------
     Public Campgrounds 
 -------------------------->
-  <div class ="row">
+  <div class ="row public-cg">
     <div class="col-lg-12">
       <h2>Public Campgrounds </h2>
       <hr>
     </div>
   </div>
   
-  <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+  <div class="row text-center public-cg" style="display:flex; flex-wrap: wrap;">
     <% publicCampgrounds.forEach(function(campground) { %>
       <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="thumbnail">
@@ -39,14 +39,19 @@
 <!-------------------------
     Secret Campgrounds 
 -------------------------->
-  <div class ="row">
+  <div class ="row secret-cg">
     <div class="col-lg-12">
       <h2>Secret Campgrounds</h2>
       <hr>
     </div>
   </div>
   
-   <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+   <div class="row text-center secret-cg" style="display:flex; flex-wrap: wrap;">
+     
+     
+    
+    <% if (currentUser && currentUser.isMember) { %>  <!-- IF User IS a MEMBER -->
+    
     <% secretCampgrounds.forEach(function(campground) { %>
       <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="thumbnail">
@@ -63,6 +68,24 @@
         </div>
       </div>
     <% }); %>
+    
+    
+    <% } else { %>  <!-- IF User is NOT a member -->
+      <% for (var i =0; i < 11; i++) { %>
+        
+        <div class="col-lg-3 col-md-4 col-sm-6">
+          <div class="thumbnail">
+            <img src="images/default-tent.png" alt="" title="">
+              <div class="caption">
+                <h4>???</h4>
+                <p>???</p>
+                <p>???</p>
+              </div>
+              <p><a href="/members" class="btn btn-info"><i class="fa fa-info-circle" aria-hidden="true"></i><span>    More Info</span></a> </p>
+          </div>
+        </div>
+      <% } %>
+    <% } %>
   </div>
 
 <% include ../partials/footer %>

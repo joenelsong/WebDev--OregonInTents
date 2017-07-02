@@ -152,6 +152,10 @@ router.put('/campgrounds/:id', myMiddleware.checkCampgroundOwnership, function(r
       var lat = data.results[0].geometry.location.lat;
       var lng = data.results[0].geometry.location.lng;
       location = data.results[0].formatted_address;
+    } else 
+    {
+      var lat = -1;
+      var lng = -1;
     }
     
     

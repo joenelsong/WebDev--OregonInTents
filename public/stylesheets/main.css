@@ -117,7 +117,7 @@ h2 {
 }
 
 .list-group-item:hover {
-  background-color: #417cb8;
+  background-color: #91acd8;
   box-shadow: 0 5px #27496d;
 
 }
@@ -161,4 +161,17 @@ i {
   display: inline-block;
   font-size: 12px;
   vertical-align: middle;
+}
+
+
+/** /Campgrounds **/
+.public-cg {
+  background-color: #888;
+  
+}
+.secret-cg {
+  background-color: #333;
+}
+.secret-cg h2 {
+  color: #eee;
 }
