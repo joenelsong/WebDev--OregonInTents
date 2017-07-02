@@ -34,6 +34,8 @@ Technology Stack:
 * CREATE  campgrounds/:id/comments/       POST
 
 TO DO:
+* Password Reset
+* User Profiles
+* Stripe Payment / Bitcoin Donation Links
 * Implement rating system
-* Make a cron job to automatically delete entries with very low ratings that have existed for a certain period of time.
-* Update Weather Widget to show info for specified region
+** Make a cron job to automatically delete entries with very low ratings that have existed for a certain period of time.
