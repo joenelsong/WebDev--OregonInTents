@@ -43,7 +43,7 @@ Technology Stack:
 * DESTROY |  /campgrounds/:id/comments/comment_id       |  DELETE |   Deletes comment from the database
 
 
-TO DO:
+# TO DO:
 * Password Reset
 * User Profiles
 * Add Filters
