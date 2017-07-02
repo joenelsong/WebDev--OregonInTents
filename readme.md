@@ -17,21 +17,31 @@ Technology Stack:
 # RESTFUL ROUTES
 
 ## Campgrounds
-### name |   url              |  verb  |   description                             
+### name |   url                       |  verb   |   description                             
 ----------------------------------------------------------------------------------
-* INDEX  |  /campgrounds      |  GET   |   Display a list of all campgrounds
-* NEW    |  /campgrounds/new  |  GET   |   Displays form to make a new campgrounds
-* CREATE |  /campgrounds      |  POST  |   Creates a new campground entry
-* SHOW   |  /campgrounds:id   |  GET   |   Shows info about one Campgrounds
+* INDEX   |  /campgrounds              |  GET    |   Display a list of all campgrounds
+* NEW     |  /campgrounds/new          |  GET    |   Displays form to make a new campgrounds
+* CREATE  |  /campgrounds              |  POST   |   Creates a new campground entry
+* SHOW    |  /campgrounds:id           |  GET    |   Shows info about one Campgrounds
+* EDIT    |  /campgrounds/:id/edit     |  GET    |   Displays form to edit campground data
+* UPDATE  |  /campgrounds/:id/         |  PUT    |   Pushes campground edits to the database
+* DESTROY |  /campgrounds/:id/         |  DELETE |   Deletes campground from the database
+
+* APPROVE |  /campgrounds/:id/approve  |  POST  |   Approves campground and awards points to self and author
+* REJECT  |  /campgrounds/:id/reject   |  POST  |   Deletes campground and awards points to self
 
 
-#NESTED ROUTES
+# NESTED ROUTES
 
-## Comments
-### name      url         verb            desc.
+## Campgrounds/Comments
+### name |   url                                        |  verb   |   description      
 ----------------------------------------------------------------------------------
-* NEW     campgrounds/:id/comments/new    GET
-* CREATE  campgrounds/:id/comments/       POST
+* NEW     |  /campgrounds/:id/comments/new              |  GET    |   Display a form to create a new comment
+* CREATE  |  /campgrounds/:id/comments/                 |  POST   |   Creates a new comment
+* EDIT    |  /campgrounds/:id/comments/comment_id/edit  |  GET    |   Displays form to edit a comment
+* UPDATE  |  /campgrounds/:id/comments/comment_id       |  PUT    |   Pushed comment edits to the database
+* DESTROY |  /campgrounds/:id/comments/comment_id       |  DELETE |   Deletes comment from the database
+
 
 TO DO:
 * Password Reset
