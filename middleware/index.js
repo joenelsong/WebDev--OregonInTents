@@ -1,6 +1,7 @@
 // all the middleware goes here
 var Campground = require("../models/campground");
 var Comment = require("../models/comment");
+var User = require("../models/user");
 
 
 var middlewareObj = {};
@@ -124,5 +125,31 @@ middlewareObj.isLoggedIn = function(req, res, next) {
   res.redirect('/login');
 }
 
+
+
+middlewareObj.awardPublicPoints = function (user_id, amt) {
+  
+  User.findById(user_id, function(err, foundUser) {
+    if(err) {
+      console.log("can't find user");
+      return false;
+    }
+    var newPointTotal = foundUser.publicPoints + amt;
+    var updateObj = {publicPoints: newPointTotal}
+    
+     //Check to see if user has more than 10 points, if so promote to member
+    if (!foundUser.isMember && newPointTotal >= 10) {
+      updateObj.isMember = true;
+    }
+    
+    User.findByIdAndUpdate(user_id, {$set: updateObj }, function(err, foundUser) {
+      if(err){
+        console.log(err);
+      }
+   });
+   
+  });
+  
+}
 
 module.exports = middlewareObj;

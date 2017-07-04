@@ -198,11 +198,11 @@ router.put('/campgrounds/:id/approve', myMiddleware.checkMembership, myMiddlewar
       res.redirect('/campgrounds');
     } else {
         // Award points to Reviewing user
-        if (awardPublicPoints(req.user._id, 1) === false) {
+        if (myMiddleware.awardPublicPoints(req.user._id, 1) === false) {
           console.log("awardPublicPoints FAILED!");
         }
         // Award points to submitting user
-        if (awardPublicPoints(updatedCampground.author.id, 2) === false) {
+        if (myMiddleware.awardPublicPoints(updatedCampground.author.id, 2) === false) {
           console.log("awardPublicPoints FAILED!");
         }
         //redirect to show page
@@ -229,7 +229,7 @@ router.put('/campgrounds/:id/reject', myMiddleware.checkMembership, myMiddleware
             res.redirect("/campgrounds");
           } else {
                 // Award points to user
-            if (awardPublicPoints(req.user._id, 1) === false) {
+            if (myMiddleware.awardPublicPoints(req.user._id, 1) === false) {
               console.log("awardPublicPoints FAILED!");
             }
             req.user.publicPoints = 1;
@@ -244,35 +244,6 @@ router.put('/campgrounds/:id/reject', myMiddleware.checkMembership, myMiddleware
   });
 
 });
-
-function awardPublicPoints(user_id, amt) {
-  
-  User.findById(user_id, function(err, foundUser) {
-    if(err) {
-      console.log("can't find user");
-      return false;
-    }
-    var newPointTotal = foundUser.publicPoints + amt;
-    var updateObj = {publicPoints: newPointTotal}
-     //Check to see if user has more than 10 points, if so promote to member
-    if (!foundUser.isMember && newPointTotal >= 10) {
-      updateObj.isMember = true;
-    }
-    
-    User.findByIdAndUpdate(user_id, {$set: updateObj }, function(err, foundUser) {
-      if(err){
-        console.log(err);
-      }
-      
-     
-   });
-
-    
-  });
-  
-
-  
-}
 
 
 function titleCase(str)
