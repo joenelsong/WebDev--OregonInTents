@@ -1,11 +1,18 @@
-var express = require('express');
-var router = express.Router();
+var express         = require('express');
+var request         = require('request');
+var router          = express.Router();
 
-var Campground = require("../models/campground");
-var User = require("../models/user");
+var Campground      = require("../models/campground");
+var User            = require("../models/user");
 
-var myMiddleware = require('../middleware'); // node will automatically require index.js because it is named index.js
-var geocoder = require('geocoder');
+var myMiddleware    = require('../middleware'); // node will automatically require index.js because it is named index.js
+var geocoder        = require('geocoder');
+
+
+var GOOGLE_MAPS_DISTANCE_MATRIX_API = { "Project": "OregonInTents",
+                                        "Key" : "AIzaSyBrzuvM-Kfy-Lvy7eGDjRcBFBjFxBymU7g",
+                                        "Url" : "https://developers.google.com/maps/documentation/distance-matrix/"
+};
 
 // ===================
 // CAMPGROUNDS ROUTES
@@ -16,6 +23,7 @@ var geocoder = require('geocoder');
 router.get("/campgrounds", function(req, res) {
   //console.log(req.user);
   
+
   //Get public campgrounds from db
   Campground.find({isSecret: false}, function(err, publicCampgrounds) {
     if(err) {
@@ -26,7 +34,76 @@ router.get("/campgrounds", function(req, res) {
         if(err) {
           console.log('campgrounds.js >> ' + err);
         } else {
-          res.render("campgrounds/index", { publicCampgrounds: publicCampgrounds, secretCampgrounds: secretCampgrounds, page: 'campgrounds'} );
+          
+          
+            /**  FILTER Results by distance  **/
+
+            if(req.query.distance && req.query.city && req.query.state){
+              console.log("Distance = "+req.query.distance);
+              
+              // Iterate through campgrounds and get their locations
+      
+              var campgroundLocations = publicCampgrounds[0].city+","+publicCampgrounds[0].state;
+              var publicCampgroundDistFilter = [];
+              for (var i = 1; i < publicCampgrounds.length; i++) {
+                campgroundLocations+="|"+publicCampgrounds[i].city+", "+publicCampgrounds[i].state
+              }
+              
+              
+              var url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="+req.query.city+","+req.query.state+"&destinations="+campgroundLocations+"&key="+GOOGLE_MAPS_DISTANCE_MATRIX_API.Key;
+              
+              console.log("var url = \n"+url+"\n");
+              //Google Maps Distance Matrix API Call
+              request(url, function(error, response, body) {
+                if (!error && response.statusCode==200) {
+                  console.log("https://maps.googleapis.com/maps/api/distancematrix Request Returned Successfully")
+                  var data = JSON.parse(body);
+                  console.log(data['rows']);
+                  
+                  console.log("Distance = " + req.query.distance);
+                  for (var i = 0; i < publicCampgrounds.length; i++) {
+                    
+                    if ( data['rows'][0]['elements'][i]['status'] === "OK")  {
+                      
+                      var distDiff = data['rows'][0]['elements'][i]['distance']['text'].split(" mi");
+                      var distDiff = parseInt(distDiff[0]);
+                      console.log(distDiff);
+                      
+                      if (distDiff <= req.query.distance) {
+                        //<= parseInt(req.query.distance)*100 )
+                        publicCampgroundDistFilter.push(true);
+                      } else {
+                        publicCampgroundDistFilter.push(false);
+                      }
+                      
+                    } else {
+                      publicCampgroundDistFilter.push(false);
+                      console.log("No Result for that campground");
+                    }
+                  }
+                  
+                  console.log("publicCampgroundDistFilter = "+ publicCampgroundDistFilter);
+                  
+                  // Remove campgrounds that did not match filter criteria
+                  for (var i = 0; i < publicCampgrounds.length; i++) {
+                    if (publicCampgroundDistFilter[i] === false) {
+                      publicCampgrounds.splice(i,1);
+                      console.log("FALSE / SLICE");
+                    }
+                  }
+                }
+                // render page
+                console.log(publicCampgrounds.length);
+                res.render("campgrounds/index", { publicCampgrounds: publicCampgrounds, secretCampgrounds: secretCampgrounds, page: 'campgrounds', qryDistance: req.query.distance, qryCity: req.query.city, qryState: req.query.state} );
+            
+              });
+    
+              
+            } else {
+              // render page without having filtered
+              res.render("campgrounds/index", { publicCampgrounds: publicCampgrounds, secretCampgrounds: secretCampgrounds, page: 'campgrounds', qryDistance: "", qryCity: "", qryState: "OR"} );
+            } // end if (req.query.distance)
+          
         }
       });
     }

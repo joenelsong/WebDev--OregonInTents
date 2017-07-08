@@ -163,6 +163,16 @@ i {
   vertical-align: middle;
 }
 
+/** Filter Search **/
+
+#searchFilter {
+  border: 2px solid purple;
+}
+#searchFilter input {
+}
+#searchFilter input[type="button"] {
+  display: inline;
+}
 
 /** /Campgrounds **/
 .public-cg {
