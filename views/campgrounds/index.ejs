@@ -14,13 +14,13 @@
   <div class="col-lg-12" id="searchFilter">
     <form action="/campgrounds" method="GET">
       <span>Within</span>
-      <input required name="distance" type="text" placeholder="10" maxlength="3" size="3" value=<%=qryDistance%> >
+      <input required name="distance" type="text" placeholder="100" maxlength="3" size="3" value=<%=qryDistance%> >
       <span>miles of </span>
       <input required name ="city" type="text" placeholder="city" maxlength="30" size="15" value=<%=qryCity%>><strong>, </strong>
-      <input required name ="state" type="text" placeholder="state" maxlength="2" size="2" value="OR">
+      <input required name ="state" type="text" placeholder="OR" maxlength="2" size="2" value=<%=qryState%>>
       <input class="btn btn-primary btn-sm" type = 'submit' value='Filter Results'></input>
       <a class="btn btn-secondary" href="/campgrounds">Reset</a>
-      <span class = "filterResultsMsg"><%=publicCgLength%> public campgrounds found!</span>
+        <span class = "filterResultsMsg"><%=publicCampgrounds.length%> public campgrounds found!</span>
     </form>
   </div>
 </div>

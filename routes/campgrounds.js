@@ -95,14 +95,14 @@ router.get("/campgrounds", function(req, res) {
                 // render page
                 console.log(publicCampgrounds.length);
                 publicCampgrounds.length
-                res.render("campgrounds/index", { publicCampgrounds: publicCampgrounds, secretCampgrounds: secretCampgrounds, page: 'campgrounds', qryDistance: req.query.distance, qryCity: req.query.city, qryState: req.query.state, publicCgLength: publicCampgrounds.length} );
+                res.render("campgrounds/index", { publicCampgrounds: publicCampgrounds, secretCampgrounds: secretCampgrounds, page: 'campgrounds', qryDistance: req.query.distance, qryCity: req.query.city, qryState: req.query.state} );
             
               });
     
               
             } else {
               // render page without having filtered
-              res.render("campgrounds/index", { publicCampgrounds: publicCampgrounds, secretCampgrounds: secretCampgrounds, page: 'campgrounds', qryDistance: "", qryCity: "", qryState: "OR"} );
+              res.render("campgrounds/index", { publicCampgrounds: publicCampgrounds, secretCampgrounds: secretCampgrounds, page: 'campgrounds', qryDistance: "", qryCity: "", qryState: ""} );
             } // end if (req.query.distance)
           
         }
