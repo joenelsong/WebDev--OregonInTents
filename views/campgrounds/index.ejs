@@ -19,6 +19,8 @@
       <input required name ="city" type="text" placeholder="city" maxlength="30" size="15" value=<%=qryCity%>><strong>, </strong>
       <input required name ="state" type="text" placeholder="state" maxlength="2" size="2" value="OR">
       <input class="btn btn-primary btn-sm" type = 'submit' value='Filter Results'></input>
+      <a class="btn btn-secondary" href="/campgrounds">Reset</a>
+      <span class = "filterResultsMsg"><%=publicCgLength%> public campgrounds found!</span>
     </form>
   </div>
 </div>

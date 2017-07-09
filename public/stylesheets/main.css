@@ -173,7 +173,9 @@ i {
 #searchFilter input[type="button"] {
   display: inline;
 }
-
+.filterResultsMsg {
+  background-color: lightgreen;
+}
 /** /Campgrounds **/
 .public-cg {
   background-color: #888;

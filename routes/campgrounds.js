@@ -85,16 +85,17 @@ router.get("/campgrounds", function(req, res) {
                   console.log("publicCampgroundDistFilter = "+ publicCampgroundDistFilter);
                   
                   // Remove campgrounds that did not match filter criteria
-                  for (var i = 0; i < publicCampgrounds.length; i++) {
+                  for (var i = publicCampgrounds.length-1; i >=0; i--) { // iterating backwards because index changes as we splice
                     if (publicCampgroundDistFilter[i] === false) {
                       publicCampgrounds.splice(i,1);
-                      console.log("FALSE / SLICE");
+                      console.log("FALSE / SPLICE");
                     }
                   }
                 }
                 // render page
                 console.log(publicCampgrounds.length);
-                res.render("campgrounds/index", { publicCampgrounds: publicCampgrounds, secretCampgrounds: secretCampgrounds, page: 'campgrounds', qryDistance: req.query.distance, qryCity: req.query.city, qryState: req.query.state} );
+                publicCampgrounds.length
+                res.render("campgrounds/index", { publicCampgrounds: publicCampgrounds, secretCampgrounds: secretCampgrounds, page: 'campgrounds', qryDistance: req.query.distance, qryCity: req.query.city, qryState: req.query.state, publicCgLength: publicCampgrounds.length} );
             
               });
     
