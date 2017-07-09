@@ -8,10 +8,6 @@ var async           = require('async');
 var nodemailer      = require('nodemailer');
 var crypto          = require('crypto'); // part of node, no need to install
 
-var reCaptcha = { siteKey:'6LeY4CQUAAAAAMSWbEG_zffmN3NQJIvgbR6TLMwP',
-                  secretKey:'6LeY4CQUAAAAAMgXhZJrX3rirT0TPhamsGB-IZLp'};
-
-
 
 // ROOT ROUTE
 router.get("/", function(req, res) {
@@ -46,11 +42,9 @@ router.post('/register', function(req, res) {
     return res.redirect('register');
     
   }
-  // Put your secret key here.
-  var secretKey = "--paste your secret key here--";
+
   // req.connection.remoteAddress will provide IP address of connected user.
-  console.log(reCaptcha.secretKey);
-  var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + reCaptcha.secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+  var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + process.env.GOOGLE_RECAPTCHA_API_KEY + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
   // Hitting GET request to the URL, Google will respond with success or error scenario.
   request(verificationUrl,function(error,response,body) {
     body = JSON.parse(body);
@@ -71,7 +65,7 @@ router.post('/register', function(req, res) {
       if(err){
         console.log(err);
         req.flash('error', err.message); // below causes flash message, don't need this.
-        return; // will cause flash message, so don't need above.
+        return res.redirect('/register'); // will cause flash message, so don't need above.
       }
       
       console.log("New User Registered: " + newUser);

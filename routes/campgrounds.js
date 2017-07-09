@@ -8,12 +8,6 @@ var User            = require("../models/user");
 var myMiddleware    = require('../middleware'); // node will automatically require index.js because it is named index.js
 var geocoder        = require('geocoder');
 
-
-var GOOGLE_MAPS_DISTANCE_MATRIX_API = { "Project": "OregonInTents",
-                                        "Key" : "AIzaSyBrzuvM-Kfy-Lvy7eGDjRcBFBjFxBymU7g",
-                                        "Url" : "https://developers.google.com/maps/documentation/distance-matrix/"
-};
-
 // ===================
 // CAMPGROUNDS ROUTES
 // ===================
@@ -50,13 +44,13 @@ router.get("/campgrounds", function(req, res) {
               }
               
               
-              var url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="+req.query.city+","+req.query.state+"&destinations="+campgroundLocations+"&key="+GOOGLE_MAPS_DISTANCE_MATRIX_API.Key;
+              var url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins="+req.query.city+","+req.query.state+"&destinations="+campgroundLocations+"&key="+process.env.GOOGLE_MAPS_DISTANCE_MATRIX_API_KEY;
               
               console.log("var url = \n"+url+"\n");
               //Google Maps Distance Matrix API Call
               request(url, function(error, response, body) {
                 if (!error && response.statusCode==200) {
-                  console.log("https://maps.googleapis.com/maps/api/distancematrix Request Returned Successfully")
+                  console.log("https://maps.googleapis.com/maps/api/distancematrix Request Returned");
                   var data = JSON.parse(body);
                   console.log(data['rows']);
                   
