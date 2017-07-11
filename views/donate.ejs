@@ -1,0 +1,51 @@
+<% include ./partials/header %>
+
+
+ <div class="row">
+  <h1>Donate</h1>
+  <h3>Support this site by donating to its creator(s)</h3>
+  
+  <h3>Credit Card</h3>
+  
+  <div id="stripeButtons">
+  <form action="/charge/200" method="POST">
+    <script
+      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-label="$2"
+      data-key="pk_test_2X5lmNAdwpkOgOyQ8Bb7vO8L"
+      data-amount="200"
+      data-name="Support Oregon In Tents"
+      data-description="Donate"
+      data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+      data-locale="auto">
+    </script>
+  </form>
+  <form action="/charge/1000" method="POST"> 
+    <script
+      src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+      data-label="$10"
+      data-key="pk_test_2X5lmNAdwpkOgOyQ8Bb7vO8L"
+      data-amount="1000"
+      data-name="Support Oregon In Tents"
+      data-description="Donate"
+      data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+      data-locale="auto">
+    </script>
+  </form>
+  </div>
+  
+  <h3>Cryptourrencies</h3>
+  <ul>
+    <li>BTC: 18rxkzeCrJsL9Xg7eCmpbZayNoPgSwtWPm</li>
+    <li>LTC: LLHci4WsHHCR9YUTyDQUCHnK2VLNYgwdS7</li>
+    <li>ETH: 0x951eb008d52005dd33a5d8b04453582fb7eb3d0e</li>
+  </ul>
+  
+</div>
+
+
+
+
+
+
+<% include ./partials/footer %>

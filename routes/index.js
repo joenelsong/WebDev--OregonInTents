@@ -7,6 +7,7 @@ var request         = require('request');
 var async           = require('async');
 var nodemailer      = require('nodemailer');
 var crypto          = require('crypto'); // part of node, no need to install
+var stripe          = require("stripe")("sk_test_4YlRVGTwtC5Z6fwLmEt98HB4");
 
 
 // ROOT ROUTE
@@ -21,6 +22,7 @@ router.get("/members", function(req, res) {
 // ==============
 // AUTH ROUTES
 // ==============
+
 
 // Show registration form
 router.get('/register', function(req, res) {
@@ -219,5 +221,35 @@ router.post('/reset/:token', function(req, res) {
     res.redirect('/campgrounds');
   });
 });
+
+// Donate
+router.get('/donate', function(req, res) {
+  res.render('donate');
+});
+
+router.get('/paysuccess', function(req, res) {
+  res.render('paysuccess');
+});
+
+router.post('/charge/:amt', function(req, res) {
+  var token = req.body.stripeToken;
+  // Charge the user's card:
+  var charge = stripe.charges.create({
+    amount: req.params.amt,
+    currency: "usd",
+    description: "Example charge",
+    source: token,
+  }, function(err, charge) {
+    if(err && err.type ==="StripeCardError") {
+      req.flash('error', 'Your card was declined');
+    } else {
+      req.flash('success', "Thank you for your support! Your donation of $" + (req.params.amt/100) + " has been processed.");
+    }
+    res.redirect('/campgrounds')
+    // asynchronously called
+  });
+});
+
+
 
 module.exports = router;

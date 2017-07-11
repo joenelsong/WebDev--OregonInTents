@@ -187,3 +187,11 @@ i {
 .secret-cg h2 {
   color: #eee;
 }
+
+
+/*********** 
+  /Donate 
+***********/
+#stripeButtons form, button, span{
+  display: inline;
+}
