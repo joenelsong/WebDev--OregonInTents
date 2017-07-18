@@ -20,7 +20,7 @@
       <input required name ="state" type="text" placeholder="OR" maxlength="2" size="2" value=<%=qryState%>>
       <input class="btn btn-primary btn-sm" type = 'submit' value='Filter Results'></input>
       <a class="btn btn-secondary" href="/campgrounds">Reset</a>
-        <span class = "filterResultsMsg"><%=publicCampgrounds.length%> public campgrounds found!</span>
+        <span class = "filterResultsMsg" id="search-filter-return-count"><%=publicCampgrounds.length%></span><span class = "filterResultsMsg"> public campgrounds found!</span>
     </form>
   </div>
 </div>
