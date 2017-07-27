@@ -1,11 +1,11 @@
 <% include ../partials/header %>
-  <header class="jumbotron">
+  <div class="jumbotron">
     <div class="container">
       <h1><img src="images/default-tent.png" style="width: 8vw" alt="Tent Camping in Oregon" title="Tent Camping in Oregon"> Welcome to Oregon In Tents</h1>
       <p>Take a look at our public campground listings or check out our members only secret campgrounds.</p>
-      <p> <a class="btn btn-primary btn-lg" href="/campgrounds/new">Add a new campground</a>
+      <p> <a class="btn btn-primary btn-lg" href="/campgrounds/new" title="Click to add a new campground to OregonInTents listings">Add a new campground</a>
     </div>
-  </header>
+  </div>
   
 <!-------------------------
       Search Filter
@@ -18,7 +18,7 @@
       <span>miles of </span>
       <input required name ="city" type="text" placeholder="city" maxlength="30" size="15" value=<%=qryCity%>><strong>, </strong>
       <input required name ="state" type="text" placeholder="OR" maxlength="2" size="2" value=<%=qryState%>>
-      <input class="btn btn-primary btn-sm" type = 'submit' value='Filter Results'></input>
+      <input class="btn btn-primary btn-sm" type = 'submit' value='Filter Results' title="Filter results by distance from the specified location"></input>
       <a class="btn btn-secondary" href="/campgrounds">Reset</a>
         <span class = "filterResultsMsg" id="search-filter-return-count"><%=publicCampgrounds.length%></span><span class = "filterResultsMsg"> public campgrounds found!</span>
     </form>

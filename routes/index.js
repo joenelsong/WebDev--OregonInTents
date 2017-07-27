@@ -59,6 +59,15 @@ router.post('/register', function(req, res) {
     }
     // If successful, continue processing registration.
     //res.json({"responseCode" : 0,"responseDesc" : "Sucess"});
+    
+
+    // Validate Email Address Pattern
+    var reEmailFormat = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (reEmailFormat.test(req.body.email) == false) {
+      req.flash('error', "Invalid Email Address"); // below causes flash message, don't need this.
+      return res.redirect('/register'); // will cause flash message, so don't need above.
+    }
+    
     // ==================
     // Create New User
     // ==================
@@ -248,6 +257,13 @@ router.post('/charge/:amt', function(req, res) {
     res.redirect('/campgrounds')
     // asynchronously called
   });
+});
+
+
+
+// Catch all
+router.get("/:anything", function(req, res) {
+  res.redirect("/campgrounds");
 });
 
 
