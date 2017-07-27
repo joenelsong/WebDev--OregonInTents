@@ -15,9 +15,9 @@
 .jumbotron {
   margin-top: 2em;
   width: 100%;
-  color: brown;
-  border: solid green 4px;
+  background: rgba(170, 200, 170, 0.8);
 }
+
 .row {
   margin-left: 0px;
   margin-right: 0px;
@@ -184,7 +184,7 @@ i {
 }
 /** /Campgrounds **/
 .public-cg {
-  background-color: #8b8;
+  background-color: #999;
   
 }
 .secret-cg {
