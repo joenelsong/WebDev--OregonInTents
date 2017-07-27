@@ -30,6 +30,13 @@ h2 {
   font-size: 200%;
 }
 
+.btn {
+  min-width: 40vw;
+  min-height: 6vh;
+  line-height: 6vh;
+  vertical-align: middle;
+}
+
 .slideshow { 
   position: fixed;
   width: 100%;
