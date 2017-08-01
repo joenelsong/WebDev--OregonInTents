@@ -3,6 +3,7 @@
   top: 0; /* Position the navbar at the top of the page */
   width: 100%;
   z-index: 100;
+  opacity: 0.96;
 }
 #flashMessageContainer {
   margin-top: 60px;

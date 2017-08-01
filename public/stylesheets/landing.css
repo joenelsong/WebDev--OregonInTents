@@ -27,14 +27,32 @@ h2 {
 }
 
 #landing-header .btn {
-  font-size: 200%;
+  font-size: 250%;
 }
 
 .btn {
-  min-width: 40vw;
+  min-width: 30vw;
   min-height: 6vh;
   line-height: 6vh;
   vertical-align: middle;
+}
+
+.button_slide {
+  color: #FFF;
+  border: 4px solid rgb(10, 100, 10);
+  border-radius: 0px;
+  padding: 18px 36px;
+  display: inline-block;
+  letter-spacing: 1px;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0 rgb(10, 100, 10);
+  -webkit-transition: ease-out 0.4s;
+  -moz-transition: ease-out 0.4s;
+  transition: ease-out 0.4s;
+}
+.button_slide:hover {
+  box-shadow: inset 0 0 0 50px rgb(20, 200, 20);
+  border: 4px solid rgb(20, 200, 20);
 }
 
 .slideshow { 
