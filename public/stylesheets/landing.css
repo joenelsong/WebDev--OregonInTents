@@ -28,31 +28,26 @@ h2 {
 
 #landing-header .btn {
   font-size: 250%;
-}
-
-.btn {
-  min-width: 30vw;
-  min-height: 6vh;
-  line-height: 6vh;
+  text-decoration: none;
   vertical-align: middle;
 }
 
-.button_slide {
-  color: #FFF;
-  border: 4px solid rgb(10, 100, 10);
-  border-radius: 0px;
-  padding: 18px 36px;
-  display: inline-block;
-  letter-spacing: 1px;
-  cursor: pointer;
-  box-shadow: inset 0 0 0 0 rgb(10, 100, 10);
-  -webkit-transition: ease-out 0.4s;
-  -moz-transition: ease-out 0.4s;
-  transition: ease-out 0.4s;
-}
-.button_slide:hover {
-  box-shadow: inset 0 0 0 50px rgb(20, 200, 20);
-  border: 4px solid rgb(20, 200, 20);
+.btn-enter {
+  min-width: 30vw;
+  min-height: 6vh;
+  line-height: 6vh;
+  color: white;
+  border: 2px solid rgb(16, 234, 78, 25);
+  box-shadow: inset 0 0 8px rgba(16, 234, 78, 25);
+  text-shadow: none;
+  transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+} 
+
+.btn-enter:hover {
+  border: 1px;
+  color: #777;
+  box-shadow: inset 0 0 20px rgba(0, 109, 18, .5), 0 0 20px rgba(0, 109, 18, .2);
+  text-shadow: 1px 1px 2px rgb(0, 109, 18); 
 }
 
 .slideshow { 

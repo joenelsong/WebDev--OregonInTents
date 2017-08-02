@@ -34,11 +34,11 @@
           <a class="navbar-brand" href="/">Oregon In Tents</a>
         </div>
         <div id = "navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav stroke">
             <li class="<%= typeof page !== 'undefined' && page === 'campgrounds' ? 'active' : '' %>"><a href="/campgrounds">Home</a></li> <!-- if we are on the campgrounds page make home active, otherwise do not -->
-            <li class="<%= typeof page !== 'undefined' && page === 'members' ? 'active' : '' %>"><a href="/members">Members</a></li>
+            <li class="<%= typeof page !== 'undefined' && page === 'members' ? 'active' : '' %>"><a href="/members">Membership</a></li>
           </ul>
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right stroke">
             <!-- Show Customized Nav Bar Items depending on Login Status -->
             <% if(!currentUser){ %>
               <li><a href="/login">Login</a></li>
