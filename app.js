@@ -89,10 +89,13 @@ conn.once('open', function() {
 var commentRoutes = require('./routes/comments');
 var campgroundsRoutes = require('./routes/campgrounds');
 var indexRoutes = require('./routes/index');
+var userProfileRoutes = require('./routes/user-profile');
 
 app.use(commentRoutes);
 app.use(campgroundsRoutes);
+app.use(userProfileRoutes);
 app.use(indexRoutes);
+
 
 // Start Server
 app.listen(process.env.PORT, process.env.IP, function() {

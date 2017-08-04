@@ -259,6 +259,21 @@ i {
 }
 
 
+/*************
+User Profile
+*************/
+
+table.user-profile {
+  margin-top: 20px;
+  border-collapse: separate;
+  border-spacing: 0px;
+}
+table.user-profile td{
+    margin: 0px 0px 0px 0px;
+    padding: 12px 20px 0px 0px;
+}
+
+
 /*********** 
   /Donate 
 ***********/

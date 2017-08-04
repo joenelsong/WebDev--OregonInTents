@@ -44,7 +44,7 @@
               <li><a href="/login">Login</a></li>
               <li><a href="/register">Sign Up</a></li>
               <% } else { %>
-                <li><a id="userHeaderDisplay">
+                <li><a id="userHeaderDisplay" href="/user-profile">
                   <% if (currentUser.isAdmin) { %>
                     <i class="fa fa-gavel" aria-hidden="true" style="color: brown;"></i>
                   <% } else if (currentUser.isMember)  { %>
@@ -52,11 +52,8 @@
                   <% } else { %>
                     <i class="fa fa-user-o" aria-hidden="true"></i>
                   <% } %>
-                    &nbsp;&nbsp;<%=  currentUser.username %>
+                    &nbsp;&nbsp;<%=currentUser.username %>
                     <span id="PP-badge" class= "badge" data-count=<%=currentUser.publicPoints%> title="These are your contribution points, contribute more to gain more tree power!"><i class="fa fa-tree"></i></span>
-                 
-                  
-
                 </a></li>
                   
             <li><a href="/logout">Log out</a></li>

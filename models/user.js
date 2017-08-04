@@ -11,7 +11,9 @@ var UserSchema = new mongoose.Schema({
   isAdmin: {type: Boolean, default: false},
   isMember: {type: Boolean, default: false},
   publicPoints: {type: Number, default: 0},
-  secretPoints: {type: Number, default: 0}
+  secretPoints: {type: Number, default: 0},
+  avatar: String,
+  bio: String
   
 });
 
