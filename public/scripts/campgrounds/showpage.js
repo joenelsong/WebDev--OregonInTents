@@ -11,7 +11,7 @@ document.getElementById("weatherLi").addEventListener("click", function(){
   
   // Set Location and Update Weather Widget
   document.querySelector("input[id=aw-search-input]").value = document.getElementById("cityStateHeader").textContent;
-  document.querySelector("form > button").click();
+  document.querySelector("form > button.aw-submit-button").click();
   
   // Style Weather Widget
   setTimeout(function(){ 
